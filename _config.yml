@@ -29,6 +29,7 @@ plugins:
   - jekyll-feed
 assets:
   cache: false
+exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor']
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
