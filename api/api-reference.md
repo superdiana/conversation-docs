@@ -436,12 +436,12 @@ $ curl -X POST https://api.nexmo.com/beta/users\
   "href": "http://conversation.local/v1/users/USR-9a88ad39-31e0-4881-b3ba-3b253e457603"
 }
 ```
-      
+
 
 <a name="users_get_query"></a>
 
 ### GET
-`https://api.nexmo.com/beta/users?{query}`
+`https://api.nexmo.com/beta/users`
 
 You use a GET request to query Users within your Nexmo application or retrieve all Users.
 
@@ -451,13 +451,6 @@ Host: api.nexmo.com
 Content-Type: application/json
 Authorization: Bearer {JWT}
 ```
-
-The following table shows the parameters you use to query Users:
-
-| Parameter | Description | Required |
-| --- | --- | --- |
-| | | |
-
 
 #### Response
 
