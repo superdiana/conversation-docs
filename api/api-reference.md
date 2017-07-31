@@ -443,7 +443,7 @@ $ curl -X POST https://api.nexmo.com/beta/users\
 ### GET
 `https://api.nexmo.com/beta/users`
 
-You use a GET request to query Users within your Nexmo application or retrieve all Users.
+You can use a GET request to query Users within your Nexmo application to retrieve a list of all Users.
 
 ```
 GET /beta/users?{query}
