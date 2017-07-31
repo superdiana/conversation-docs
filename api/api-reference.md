@@ -28,7 +28,7 @@
 <a name="authentication"></a>
 ## Security and Authentication
 
-You authenticate requests with the Conversation API using JSON Web Tokens (JWT).
+You can authenticate requests with the Conversation API using JSON Web Tokens (JWT).
 
 A JWT consists of a header, a payload and a signature in the structure xxxxx.yyyyy.zzzzz. The expected JWT structure is as follows prior to signing is:
 
@@ -56,12 +56,12 @@ You must use HTTPS for all Nexmo API requests.
 <a name="encoding"></a>
 ## Encoding
 
-You submit all requests with a `POST`, `PUT` or `GET` HTTP request using UTF-8 encoding and URL encoded values. The expected `Content-Type` for `POST` or `PUT` should be `application/json`
+You need to submit all requests with a `POST`, `PUT` or `GET` HTTP request using UTF-8 encoding and URL encoded values. The expected `Content-Type` for `POST` or `PUT` should be `application/json`
 
 <a name="conversations"></a>
 ## Conversations
 
-You use the following requests to create, read, update and delete Conversations:
+You can use the following requests to create, read, update and delete Conversations:
 
 * [POST `https://api.nexmo.com/beta/conversations`](#conversations_post) - create a Conversation
 * [GET `https://api.nexmo.com/beta/conversations?`](#conversations_get_query) - query Conversations
@@ -102,12 +102,12 @@ The request should have a JSON body. The following table shows the parameters yo
 
 #### Response
 
-A successeful request will result in a `201` response with the following attributes.
+A successful request will result in a `201` response with the following attributes.
 
 | Key | Value |
 | --- | --- |
 | id  |  The unique identifier for the conversation that has been created **TODO: This should be `uuid` to be consistent with VAPI** |
-| href | The link for the resources. |
+| href | The link for the resource. |
 
 **TODOs**
 
@@ -127,7 +127,7 @@ A successeful request will result in a `201` response with the following attribu
 
 ```bash
 $ curl -X POST https://api.nexmo.com/beta/conversations \
- -H 'Authorization: Bearer JWT \
+ -H 'Authorization: Bearer '$JWT \
  -H 'Content-Type:application/json' \
  -d '{"name":"nexmo-chat", "display_name": "Nexmo Chat"}'
 ```
@@ -203,7 +203,7 @@ $ curl https://api.nexmo.com/beta/conversations \
  **TODO: Executing this fails**
 
 ```
- › curl https://api.nexmo.com/beta/conversations -H 'Authorization: Bearer '$APP_JWT
+$ curl https://api.nexmo.com/beta/conversations -H 'Authorization: Bearer '$APP_JWT
 {"code":"conversation:error:db","description":"Internal Error. Missing error type definition: conversation:error:db"}%
 ```
 
@@ -339,7 +339,7 @@ The following table shows the parameters you use to modify a Conversation:
 | --- | --- | --- |
 | | | |
 
-**TODO:* Find out what properties can be modified. Are they propegated to the client?
+**TODO:* Find out what properties can be modified. Are they propagated to the client?
 
 #### Response
 
@@ -398,7 +398,7 @@ The request should have a JSON body. The following table shows the parameters yo
 
 #### Response
 
-A successeful request will result in a `201` response with the following attributes.
+A successful request will result in a `201` response with the following attributes.
 
 | Key | Value |
 | --- | --- |
