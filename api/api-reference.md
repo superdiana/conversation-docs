@@ -297,7 +297,8 @@ $ curl https://api.nexmo.com/beta/conversations/{uuid} \
 
 ```json
 {
-  "uuid": "CON-e3aa61a7-000e-49e9-970a-9fc7d34a79e7",
+  "id": "CON-e3aa61a7-000e-49e9-970a-9fc7d34a79e7",
+  "href" :"https://api.nexmo.com/beta/conversations/CON-e3aa61a7-000e-49e9-970a-9fc7d34a79e7",
   "name": "nexmo-chat",
   "display_name": "Nexmo Chat",
   "timestamp": {
@@ -305,11 +306,12 @@ $ curl https://api.nexmo.com/beta/conversations/{uuid} \
   },
   "sequence_number": 0,
   "numbers": {},
+  "properties": {},
   "members": [],
   "api_key":"137aa1bf",
   "_links": {
     "self": {
-      "href":"/conversations/CON-e3aa61a7-000e-49e9-970a-9fc7d34a79e7"
+      "href": "https://api.nexmo.com/beta/conversations/CON-e3aa61a7-000e-49e9-970a-9fc7d34a79e7"
     }
   },
   "_embedded": {
@@ -324,7 +326,7 @@ $ curl https://api.nexmo.com/beta/conversations/{uuid} \
 ### PUT
 `https://api.nexmo.com/beta/conversations/{uuid}`
 
-Modify an existing Conversation.
+Modify an existing Conversation
 
 ```
 PUT /beta/conversations/{uuid}
