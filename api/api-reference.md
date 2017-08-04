@@ -272,12 +272,14 @@ A successful request returns a `200` response with the following keys and values
 
 | Key | Value |
 | --- | --- |
-| uuid | The unique identifier |
+| id | The unique identifier of the conversation — a UUID prefixed with "CON-" |
+| href | The URL of the Conversation. |
 | name | The human readable unique name |
-| display_name | The display name |
-| timestamp.created | Time timestamp when the conversation was created |
-| sequence_number | TODO |
-| numbers | TODO |
+| display_name | The display name of the Conversation. Only present if a display_name was set when the Conversation was created, otherwise key not present in response. |
+| timestamp.created | ISO 8601 timestamp of when the conversation was created. |
+| sequence_number | The number of conversation elements which have been recorded on this conversation. |
+| numbers | TODO ||
+| properties | TODO ||
 | members | An array of users that are members of the conversation |
 | api_key | The API Key for the application that the conversation belongs to |
 | _links.self | A URL for the conversation resource |
