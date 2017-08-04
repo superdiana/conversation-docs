@@ -517,7 +517,15 @@ $ curl https://api.nexmo.com/beta/users/{uuid} \
 
 ##### Response
 
-TODO
+```json
+{
+  "id": "USR-e2123a2d-e7dc-4dc9-918a-a740eee40c24",
+  "name": "test-user-1",
+  "channels": {},
+  "href": "http://conversation.local/v1/users/USR-e2123a2d-e7dc-4dc9-918a-a740eee40c24"
+}
+```
+
 
 <a name="users_post"></a>
 ### PUT
