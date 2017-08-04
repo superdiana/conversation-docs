@@ -456,12 +456,13 @@ Authorization: Bearer {JWT}
 
 #### Response
 
-A successful request results in a `200` response  and contains the following keys and values:
+A successful request results in a `200` response and contains a JSON array. Each item of the array contains the following keys:
 
 | Key | Value |
 | --- | --- |
-
-TODO
+| name | The name of the user.
+| id | An identifier for the user: UUIDs prefixed with 'USR-'.
+| href | A URL to get more details about the user.
 
 #### Example: Retrieving all users
 
