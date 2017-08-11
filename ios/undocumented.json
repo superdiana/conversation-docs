@@ -316,6 +316,20 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Database/ConversationCollection.swift",
+      "line": 25,
+      "symbol": "ConversationCollection.Reason.new",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Database/ConversationCollection.swift",
+      "line": 26,
+      "symbol": "ConversationCollection.Reason.invitedBy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Database/LazyCollection.swift",
       "line": 18,
       "symbol": "LazyCollection",
@@ -429,28 +443,28 @@
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Models/NetworkError.swift",
-      "line": 36,
+      "line": 33,
       "symbol": "NetworkError.localizedTitle",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Models/NetworkError.swift",
-      "line": 39,
+      "line": 36,
       "symbol": "NetworkError.localizedDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Models/NetworkError.swift",
-      "line": 42,
+      "line": 39,
       "symbol": "NetworkError.endpointURL",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/Models/NetworkError.swift",
-      "line": 45,
+      "line": 42,
       "symbol": "NetworkError.code",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -589,13 +603,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/Event.swift",
-      "line": 180,
-      "symbol": "Event.init(conversationUuid:type:json:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
       "line": 13,
       "symbol": "MemberModel",
@@ -604,99 +611,78 @@
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 25,
+      "line": 24,
       "symbol": "MemberModel.State.joined",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 26,
+      "line": 25,
       "symbol": "MemberModel.State.invited",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 27,
+      "line": 26,
       "symbol": "MemberModel.State.left",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 28,
-      "symbol": "MemberModel.State.knocking",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 58,
+      "line": 54,
       "symbol": "MemberModel.Action.invite",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 59,
+      "line": 55,
       "symbol": "MemberModel.Action.join",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 80,
+      "line": 76,
       "symbol": "MemberModel.Channel.app",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 81,
+      "line": 77,
       "symbol": "MemberModel.Channel.sip",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 82,
+      "line": 78,
       "symbol": "MemberModel.Channel.pstn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 83,
+      "line": 79,
       "symbol": "MemberModel.Channel.sms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 84,
+      "line": 80,
       "symbol": "MemberModel.Channel.ott",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 121,
-      "symbol": "MemberModel.init(_:name:state:userId:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 128,
+      "line": 131,
       "symbol": "MemberModel.init(json:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/shamsahmed/Nexmo/conversation-ios-sdk/NexmoConversation/Core/REST/MemberModel.swift",
-      "line": 143,
-      "symbol": "MemberModel.init(json:state:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },

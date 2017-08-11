@@ -13,7 +13,7 @@
     <a title="NexmoConversation  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">NexmoConversation Docs</a> (67% documented)</p>
+        <p><a href="index.html">NexmoConversation Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/Nexmo/conversation-ios-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -175,6 +175,9 @@
               <li class="nav-group-task">
                 <a href="Structs/UploadedImage/Image.html">– Image</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Classes/ConversationPreviewModel.html">ConversationPreviewModel</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -185,6 +188,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ConversationCollection.html">ConversationCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ConversationCollection/Reason.html">– Reason</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/MemberCollection.html">MemberCollection</a>
@@ -215,9 +221,6 @@
             <a href="Other Classes.html">Other Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/ConversationPreviewModel.html">ConversationPreviewModel</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/Signal.html">Signal</a>
               </li>
               <li class="nav-group-task">
@@ -233,6 +236,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/Change.html">Change</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Other Extensions.html">Other Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/ObservableType.html">ObservableType</a>
               </li>
             </ul>
           </li>
@@ -269,6 +280,12 @@
               <li class="nav-group-task">
                 <a href="Other Functions.html#/s:F17NexmoConversationoi2eeFTOS_18SynchronizingStateS0__Sb">==(_:_:)</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Other Functions.html#/s:F17NexmoConversationoi2eeFTOVS_11MemberModel5StateOCS_5Event9EventType_Sb">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Other Functions.html#/s:F17NexmoConversationoi2eeFTOVS_11MemberModel5StateS1__Sb">==(_:_:)</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -291,7 +308,7 @@
             <h1 id='nexmo-conversation-sdk' class='heading'>Nexmo Conversation SDK</h1>
 
 <p><a href="https://dashboard.buddybuild.com/apps/5824a77e7424bc0100c4defb/build/latest"><img src="https://dashboard.buddybuild.com/api/statusImage?appID=5824a77e7424bc0100c4defb&branch=master&build=latest" alt="BuddyBuild"></a> 
-<a href=""><img src="https://img.shields.io/cocoapods/v/NexmoConversation.svg" alt="CocoaPods"></a> 
+<a href=""><img src="https://img.shields.io/cocoapods/v/NexmoConversation.svg" alt="CocoaPods"></a> (in private beta) 
 <a href=""><img src="https://img.shields.io/cocoapods/l/NexmoConversation.svg" alt="CocoaPods"></a> 
 <a href=""><img src="https://img.shields.io/cocoapods/p/NexmoConversation.svg" alt="CocoaPods"></a> 
 <a href=""><img src="https://img.shields.io/badge/Swift-3.1.X-orange.svg" alt="Swift"></a>
@@ -324,7 +341,7 @@
 <h3 id='a-href-https-github-com-carthage-carthage-carthage-a' class='heading'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
 
 <p>Add this to <code>Cartfile</code></p>
-<pre class="highlight plaintext"><code>github "Nexmoinc/NexmoConversation" ~&gt; 0.6
+<pre class="highlight plaintext"><code>github "Nexmoinc/NexmoConversation" ~&gt; 0.10
 </code></pre>
 <pre class="highlight shell"><code><span class="gp">$ </span>carthage update
 </code></pre>
@@ -339,10 +356,14 @@
 </ul>
 <h2 id='prerequisite-for-testing-in-development-environment' class='heading'>Prerequisite for testing in development environment</h2>
 
-<p>Configure the environment do the following command:</p>
-<pre class="highlight plaintext"><code>gem install bundler
+<p>Configure the environment do the following commands:</p>
+<pre class="highlight plaintext"><code>$ gem install bundler
 </code></pre>
 <pre class="highlight plaintext"><code>$ bundle install &amp;&amp; pod update
+</code></pre>
+<pre class="highlight plaintext"><code>$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</code></pre>
+<pre class="highlight plaintext"><code>$ brew bundle
 </code></pre>
 
 <p>To use project with development endpoints:</p>
@@ -355,21 +376,26 @@
 <h1 id='deploy' class='heading'>Deploy</h1>
 
 <p><a href="https://github.com/fastlane/fastlane">Fastlane</a>: Automate beta deployments and releases for our iOS demo apps. 🚀 It handles all tedious tasks, like generating screenshots, dealing with code signing, and releasing your application.</p>
+<pre class="highlight plaintext"><code>$ fastlane test
+</code></pre>
 
-<p>&mdash;&ndash; fastlane ios test
-Runs all the tests</p>
+<p>Runs all the tests</p>
+<pre class="highlight plaintext"><code>$ fastlane code_coverage
+</code></pre>
 
-<p>&mdash;&ndash; fastlane ios code_coverage
-Display test code coverage</p>
+<p>Display test code coverage</p>
+<pre class="highlight plaintext"><code>$ fastlane beta
+</code></pre>
 
-<p>&mdash;&ndash; fastlane ios beta
-Submit a new Beta Build to Apple TestFlight</p>
+<p>Submit a new Beta Build to Apple TestFlight</p>
+<pre class="highlight plaintext"><code>$ fastlane doc
+</code></pre>
 
-<p>&mdash;&ndash; fastlane ios doc
-Update SDK docs</p>
+<p>Update SDK docs</p>
+<pre class="highlight plaintext"><code>$ fastlane ios deploy
+</code></pre>
 
-<p>&mdash;&ndash; fastlane ios deploy
-Package SDK to a framework</p>
+<p>Package SDK to a framework</p>
 <h1 id='testing' class='heading'>Testing</h1>
 
 <p>All test code are written in Swift, Network request should never reach network always use JSON stubs file to intercept request. We use third party tools for testing the framework over Apple XCTest: </p>
@@ -397,16 +423,18 @@ Package SDK to a framework</p>
 <p>You may not use, exercise any rights with respect to or exploit this SDK, or any modifications or derivative works thereof, except in accordance with the License.</p>
 <h1 id='author' class='heading'>Author</h1>
 
-<p>Jodi Humphreys, <a href="mailto:jodi.humphreys@vonage.com">jodi.humphreys@vonage.com</a> 
-Shams Ahmed, <a href="mailto:shams.ahmed@vonage.com">shams.ahmed@vonage.com</a>
-Ivan Ivanov, <a href="mailto:ivan.ivanov@vonage.com">ivan.ivanov@vonage.com</a>
-James Green, <a href="mailto:james.green@green-custard.com">james.green@green-custard.com</a>
-Paul Calver, <a href="mailto:paul.calver@vonage.com">paul.calver@vonage.com</a></p>
+<ul>
+<li>Jodi Humphreys, <a href="mailto:jodi.humphreys@vonage.com">jodi.humphreys@vonage.com</a><br></li>
+<li>Shams Ahmed, <a href="mailto:shams.ahmed@vonage.com">shams.ahmed@vonage.com</a><br></li>
+<li>Ivan Ivanov, <a href="mailto:ivan.ivanov@vonage.com">ivan.ivanov@vonage.com</a><br></li>
+<li>James Green, <a href="mailto:james.green@green-custard.com">james.green@green-custard.com</a><br></li>
+<li>Paul Calver, <a href="mailto:paul.calver@vonage.com">paul.calver@vonage.com</a><br></li>
+</ul>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://nexmo.com" target="_blank" rel="external">Nexmo</a>. All rights reserved. (Last updated: 2017-07-21)</p>
+          <p>&copy; 2017 <a class="link" href="https://nexmo.com" target="_blank" rel="external">Nexmo</a>. All rights reserved. (Last updated: 2017-08-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
