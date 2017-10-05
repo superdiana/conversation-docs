@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: conversationClientError.js</title>
+    <title>JSDoc: Source: conversationClientErrorTypes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: conversationClientError.js</h1>
+    <h1 class="page-title">Source: conversationClientErrorTypes.js</h1>
 
     
 
@@ -28,59 +28,59 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**  
  * Conversation SDK
- *  Conversation CLient Error
+ *  Conversation client Error Types
  * 
  * Copyright (c) Nexmo Inc. 2017
  */
 
-var NexmoClientErrorTypes = require('./conversationClientErrorTypes');
-
-function decorateError(instance, error) {
-
-	Object.assign(instance, error);
-	instance.message = 'type: ' + instance.type + ', description: ' + (instance.description ? instance.description : '');
-	instance.stack = (new Error()).stack;
-}
-
-/**
- * constructor
- * @param {string} errorType string client error
- */
-var NexmoClientError = function(errorType) {
-	error = NexmoClientErrorTypes[errorType];
-	// validate error type exists in mapping
-	if (!error) {
-		throw new Error("unknown error '" + errorType + "'");
+var ConversationClientErrorTypes = {
+	"error:getUserMedia:permissions": {
+		type: "error:getUserMedia:permissions",
+		description: "missing getUserMedia permissions"
+	},
+	"set:media:type:error": {
+		type: "set:media:type:error",
+		description: "currently supported type=audio:{muted:false, earmuffed:false}"
+	},
+	"error:self": {
+		type: "error:self",
+		description: "Conversation.me is null"
+	},
+	"user:error:relogin": {
+		type: "user:error:relogin",
+		description: "please relogin"
+	},
+	"error:seen:own-message": {
+		type: "error:seen:own-message",
+		description: "attempt to send seen for own message"
+	},
+	"error:already-seen": {
+		type: "error:already-seen",
+		description: "already marked as seen"
+	},
+	"error:delivered:own-message": {
+		type: "error:delivered:own-message",
+		description: "attempt to send delivered for own message"
+	},
+	"error:already-delivered": {
+		type: "error:already-delivered",
+		description: "already marked as delivered"
+	},
+	"error:fetch-image": {
+		type: "error:fetch-image",
+		description: "xhr.status received other than 200"
+	},
+	"error:missing:params": {
+		type: "error:missing:params",
+		description: "missing parameters"
+	},
+	"error:invite:missing:params": {
+		type: "error:missing:params",
+		description: "This invite cannot be sent to empty username and user_id"
 	}
-
-	decorateError(this, error);
-	// make sure the error.name matches the class name8
-	this.name = 'NexmoClientError';
 }
 
-NexmoClientError.prototype = Object.create(NexmoClientError.prototype);
-NexmoClientError.prototype.constructor = NexmoClientError;
-
-
-/**
- * constructor
- * @param {object} backend error and always containg {type: &lt;string>}
- */
-var NexmoApiError = function(error) {
-
-	decorateError(this, error);
-	// make sure the error.name matches the class name
-	this.name = 'NexmoApiError';
-}
-
-NexmoApiError.prototype = Object.create(NexmoApiError.prototype);
-NexmoApiError.prototype.constructor = NexmoApiError;
-
-
-module.exports = {
-	NexmoClientError: NexmoClientError,
-	NexmoApiError: NexmoApiError
-}</code></pre>
+module.exports = ConversationClientErrorTypes;</code></pre>
         </article>
     </section>
 
