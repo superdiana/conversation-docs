@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: conversationClientErrorTypes.js</title>
+    <title>JSDoc: Source: events/text_event.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: conversationClientErrorTypes.js</h1>
+    <h1 class="page-title">Source: events/text_event.js</h1>
 
     
 
@@ -26,69 +26,76 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**  
+            <pre class="prettyprint source linenums"><code>/*
  * Conversation SDK
- *  Conversation client Error Types
- * 
+ *  Text Event object model
+ *
  * Copyright (c) Nexmo Inc. 2017
  */
 
-var ConversationClientErrorTypes = {
-	"error:getUserMedia:permissions": {
-		type: "error:getUserMedia:permissions",
-		description: "missing getUserMedia permissions"
-	},
-	"error:media:params": {
-		type: "error:media:params",
-		description: "currently supported params media type= {audio:{muted:false, earmuffed:false}}"
-	},
-	"error:self": {
-		type: "error:self",
-		description: "Conversation object is missing self (me)"
-	},
-	"error:user:relogin": {
-		type: "error:user:relogin",
-		description: "please relogin"
-	},
-	"error:seen:own-message": {
-		type: "error:seen:own-message",
-		description: "attempt to send seen for own message"
-	},
-	"error:already-seen": {
-		type: "error:already-seen",
-		description: "already marked as seen"
-	},
-	"error:delivered:own-message": {
-		type: "error:delivered:own-message",
-		description: "attempt to send delivered for own message"
-	},
-	"error:already-delivered": {
-		type: "error:already-delivered",
-		description: "already marked as delivered"
-	},
-	"error:fetch-image": {
-		type: "error:fetch-image",
-		description: "xhr.status received other than 200"
-	},
-	"error:missing:params": {
-		type: "error:missing:params",
-		description: "missing parameters"
-	},
-	"error:invite:missing:params": {
-		type: "error:missing:params",
-		description: "This invite cannot be sent to empty username and user_id"
-	},
-	"error:audio:already-connecting": {
-		type: "error:audio:already-connecting",
-		description: "Audio call already in progress"
-	},
-	"error:audio:not-enabled": {
-		type: "error:audio:not-enabled",
-		description: "Audio is not enabled"
-	}
-}
+var Event = require('./event').Event;
 
-module.exports = ConversationClientErrorTypes;</code></pre>
+// Conversation Client Error
+var ConversationClientError = require('../conversationClientError');
+
+var NexmoApiError = ConversationClientError.NexmoApiError;
+var NexmoClientError = ConversationClientError.NexmoClientError;
+
+/**
+ * A text event
+ *
+ * @class TextEvent
+ */
+
+var TextEvent = function(conversation, params) {
+    this.conversation = conversation;
+    this.state = {
+        seen_by: {},
+        delivered_to: {}
+    };
+    if (params &amp;&amp; params.body) {
+        if (params.body.timestamp)
+            this.timestamp = params.body.timestamp;
+    }
+    // Map the params
+    for (var key in params) {
+        this[key] = params[key];
+    }
+};
+
+TextEvent.prototype = new Event(this.conversation, this);
+
+/**
+ * Set the message status to 'seen'
+ * @returns {Promise}
+ */
+TextEvent.prototype.seen = function() {
+    this.type = "text";
+    return this.seenEvent();
+};
+
+
+/**
+ * Set the message status to 'delivered'. 
+ * handled by the SDK
+ * @returns {Promise}
+ */
+TextEvent.prototype.delivered = function() {
+    this.type = "text";
+    return this.deliveredEvent();
+};
+
+/**
+ * Delete the event
+ * @returns {Promise}
+ */
+TextEvent.prototype.del = function() {
+    return this.deleteEvent();
+};
+
+module.exports = {
+    TextEvent: TextEvent
+};</code></pre>
         </article>
     </section>
 
