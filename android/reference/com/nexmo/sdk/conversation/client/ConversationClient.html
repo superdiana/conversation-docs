@@ -143,8 +143,6 @@
     <li class="selected api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/package-summary.html">com.nexmo.sdk.conversation.client</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/client/audio/package-summary.html">com.nexmo.sdk.conversation.client.audio</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/package-summary.html">com.nexmo.sdk.conversation.client.event</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/container/package-summary.html">com.nexmo.sdk.conversation.client.event.container</a></li>
@@ -156,10 +154,6 @@
   <a href="../../../../../com/nexmo/sdk/conversation/config/package-summary.html">com.nexmo.sdk.conversation.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/package-summary.html">com.nexmo.sdk.conversation.core</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/package-summary.html">com.nexmo.sdk.conversation.core.client.request</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/audio/package-summary.html">com.nexmo.sdk.conversation.core.client.request.audio</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/networking/package-summary.html">com.nexmo.sdk.conversation.core.networking</a></li>
     <li class="api apilevel-">
@@ -185,7 +179,6 @@
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ImageRepresentation.html">ImageRepresentation</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a></li>
-          <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ReceiptRecord.html">ReceiptRecord</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/SeenReceipt.html">SeenReceipt</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a></li>
@@ -357,7 +350,7 @@ Summary:
 
  <strong>Note</strong>: The connection uses socket.io for both web and mobile clients.
  Upon a successful socket.io connection the client needs to authenticate itself.
- This is achieved by sending a login request via ConversationClient#login(String, RequestHandler<User>)</p>
+ This is achieved by sending a login request via <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.LoginListener)">login(String, LoginListener)</a></code></p>
 
  <p>Unless otherwise specified, all the methods invoked by this client are executed asynchronously.</p>
 
@@ -375,9 +368,21 @@ Summary:
                      .context(applicationContext)
                      .build();
 
-     myClient.login("authToken", new RequestHandler<User> {
+     myClient.login("authToken", new LoginListener() {
+         &#64;Override
+         public void onUserAlreadyLoggedIn(User user) {
+              // Update the application UI here if needed.
+         }
          &#64;Override
          public void onSuccess(User user) {
+              // Update the application UI here if needed.
+         }
+          &#64;Override
+         public void onTokenInvalid() {
+              // Update the application UI here if needed.
+         }
+         &#64;Override
+         public void onTokenExpired() {
               // Update the application UI here if needed.
          }
          &#64;Override
@@ -723,6 +728,24 @@ Summary:
         <td class="jd-typecol">
             
             
+            final
+            
+            
+            <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#getLoggedInUser()">getLoggedInUser</a></span>()
+        
+        <div class="jd-descrdiv">Get the current logged in User if available.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            
+            
             
             
             
@@ -737,7 +760,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -755,7 +778,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -771,7 +794,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -789,7 +812,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -807,7 +830,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -825,11 +848,11 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
-            final
+            
             
             
             <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
@@ -837,13 +860,13 @@ Summary:
         <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#getUser()">getUser</a></span>()
         
-        <div class="jd-descrdiv">Get the current logged in User if available.</div>
+        <div class="jd-descrdiv">Get logged in User.</div>
   
   </td></tr>
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -861,7 +884,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -879,7 +902,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -899,7 +922,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -917,7 +940,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -933,7 +956,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -951,7 +974,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -961,7 +984,7 @@ Summary:
             void
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.User>)">login</a></span>(String token, <a href="../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>&gt; loginListener)
+        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.LoginListener)">login</a></span>(String token, <a href="../../../../../com/nexmo/sdk/conversation/client/event/LoginListener.html">LoginListener</a> loginListener)
         
         <div class="jd-descrdiv">Login this <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html">ConversationClient</a></code> instance based on the builder information and login details.</div>
   
@@ -969,7 +992,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -987,7 +1010,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1005,7 +1028,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1023,7 +1046,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1039,7 +1062,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1057,7 +1080,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1079,7 +1102,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1097,7 +1120,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1398,13 +1421,6 @@ From class
   <div class="jd-tagdata jd-tagdescr"><p>Explicitly disconnect the socket connection.
  <p>Use this when your app is not being in use.
  In order to reconnect the socket back, user must re-login.</p>
-
- Explicit disconnect also:
- <ul>
-     <li>disables and terminates any audio stream</li>
-     <li>removes any event listeners and</li>
-     <li>deletes any locally stored data.</li>
- </ul>
 
  <p>If there is no ongoing socket connection the method will return.</p></p></div>
 
@@ -1729,6 +1745,42 @@ From class
 </div>
 
 
+<a id="getLoggedInUser()"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+        final 
+         
+         
+        <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
+      </span>
+      <span class="sympad">getLoggedInUser</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Get the current logged in User if available.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>The current user.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
 <a id="getNetworkingState()"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -1898,7 +1950,7 @@ From class
   <div class="jd-tagdata jd-tagdescr"><p>Get the current synchronising State.
  Use this method whenever you want a single fast check of the sync status.
  Nevertheless, <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#synchronisationEvent()">synchronisationEvent()</a></code> does notify upon all the
- different synchronisation statuses as well.</p></div>
+ different syncrhonisation statuses as well.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>The synchronisation most recent status. One of the <code><a href="../../../../../com/nexmo/sdk/conversation/client/event/container/SynchronisingState.STATE.html">SynchronisingState.STATE</a></code>.
@@ -1961,7 +2013,7 @@ From class
       <span class="normal">
         public 
          
-        final 
+         
          
          
         <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
@@ -1979,10 +2031,10 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Get the current logged in User if available.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Get logged in User.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The current user.
+      <ul class="nolist"><li>The current logged in User.
 </li></ul>
   </div>
 
@@ -2221,7 +2273,7 @@ From class
 </div>
 
 
-<a id="login(java.lang.String, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.User>)"></a>
+<a id="login(java.lang.String, com.nexmo.sdk.conversation.client.event.LoginListener)"></a>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2234,7 +2286,7 @@ From class
         void
       </span>
       <span class="sympad">login</span>
-      <span class="normal">(String token, <a href="../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>&gt; loginListener)</span>
+      <span class="normal">(String token, <a href="../../../../../com/nexmo/sdk/conversation/client/event/LoginListener.html">LoginListener</a> loginListener)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2247,16 +2299,7 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Login this <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html">ConversationClient</a></code> instance based on the builder information and login details.
- <p> Only one <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.User>)">login(String, RequestHandler)</a></code> action can be performed at a time.
- In case there is a user already logged in <code><a href="../../../../../com/nexmo/sdk/conversation/client/event/NexmoAPIError.html#onUserAlreadyLoggedIn()">onUserAlreadyLoggedIn()</a></code> will be fired,
- and explicit <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#logout(com.nexmo.sdk.conversation.client.event.RequestHandler)">logout(RequestHandler)</a></code> needs to be performed.</p>
-
- <p>Depending on the validity of the supplied token, a <code><a href="../../../../../com/nexmo/sdk/conversation/client/event/NexmoAPIError.html">NexmoAPIError</a></code> can be fired for:
- <ul>
-     <li><code><a href="../../../../../com/nexmo/sdk/conversation/client/event/misc/SessionError.html#INVALID_TOKEN">INVALID_TOKEN</a></code>. Supplied token is not valid, your application needs to retrieve another one in order to complete login.</li>
-     <li><code><a href="../../../../../com/nexmo/sdk/conversation/client/event/misc/SessionError.html#EXPIRED_TOKEN">EXPIRED_TOKEN</a></code>. Supplied token has expired, your application needs to retrieve another one in order to complete login.</li>
- </ul>
- </p>
+ <p> Only one <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.LoginListener)">login(String, LoginListener)</a></code> action can be performed at a time. </p>
 
  <p>A network connection will be established with the Conversation service, make sure you listen to connection events
   <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#listenToConnectionEvents(com.nexmo.sdk.conversation.client.event.network.NetworkingStateListener)">listenToConnectionEvents(NetworkingStateListener)</a></code></p>
@@ -2275,7 +2318,7 @@ From class
         </tr>
         <tr>
           <th>loginListener</th>
-          <td>The completion listener.
+          <td>The <code><a href="../../../../../com/nexmo/sdk/conversation/client/event/LoginListener.html">LoginListener</a></code>.
 </td>
         </tr>
       </table>
@@ -2311,13 +2354,8 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Logout current user.
- Logout also:
- <ul>
-     <li>disconnects from the socket connection</li>
-     <li>disables and terminates any audio stream.</li>
-     <li>removes any event listeners and</li>
-     <li>deletes any locally stored data.</li>
- </ul>
+ Logout also disconnects from the Conversation socket, removes all event listeners and deletes any locally stored data.
+
  <p> Only one {ConversationClient#logout(RequestHandler)} can be performed at a time. </p></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
@@ -2536,7 +2574,7 @@ From class
 
   </p>
   <div class="jd-tagdata jd-tagdescr"><p>Set/Reset the push registration authToken whenever there is a new one available, via FirebaseInstanceIdService, prior to
- <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.User>)">login(String, RequestHandler)</a></code>.
+ <code><a href="../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#login(java.lang.String, com.nexmo.sdk.conversation.client.event.LoginListener)">login(String, LoginListener)</a></code>.
 
  <p>User must perform another login if a new push pushDeviceToken is issued.</p></p></div>
   <div class="jd-tagdata">

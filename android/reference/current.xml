@@ -180,17 +180,6 @@
 <parameter name="eventListener" type="com.nexmo.sdk.conversation.client.event.EventListener">
 </parameter>
 </method>
-<method name="audio"
- return="com.nexmo.sdk.conversation.client.audio.AudioCallManager"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
 <method name="deleteEvent"
  return="void"
  abstract="false"
@@ -435,27 +424,6 @@
 <parameter name="inviteSendListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Member&gt;">
 </parameter>
 </method>
-<method name="inviteWithAudio"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="userId" type="java.lang.String">
-</parameter>
-<parameter name="username" type="java.lang.String">
-</parameter>
-<parameter name="muted" type="boolean">
-</parameter>
-<parameter name="isEarmuff" type="boolean">
-</parameter>
-<parameter name="requestHandler" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Member&gt;">
-</parameter>
-</method>
 <method name="join"
  return="void"
  abstract="false"
@@ -530,17 +498,6 @@
  visibility="public"
 >
 </method>
-<method name="memberMediaEvent"
- return="com.nexmo.sdk.conversation.client.EventSource&lt;com.nexmo.sdk.conversation.client.MemberMedia&gt;"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
 <method name="messageEvent"
  return="com.nexmo.sdk.conversation.client.EventSource&lt;com.nexmo.sdk.conversation.client.Event&gt;"
  abstract="false"
@@ -604,19 +561,6 @@
 <parameter name="message" type="java.lang.String">
 </parameter>
 <parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Event&gt;">
-</parameter>
-</method>
-<method name="setAudioRoute"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="audioRoute" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
 </parameter>
 </method>
 <method name="setTypingTimeOutLength"
@@ -699,6 +643,17 @@
 <parameter name="requestHandler" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Conversation&gt;">
 </parameter>
 </method>
+<field name="NEED_PERMISSIONS"
+ type="int"
+ transient="false"
+ volatile="false"
+ value="100"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
 </class>
 <class name="ConversationClient"
  extends="java.lang.Object"
@@ -810,6 +765,17 @@
 <parameter name="conversationListListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.util.List&lt;com.nexmo.sdk.conversation.client.Conversation&gt;&gt;">
 </parameter>
 </method>
+<method name="getLoggedInUser"
+ return="com.nexmo.sdk.conversation.client.User"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
 <method name="getNetworkingState"
  return="com.nexmo.sdk.conversation.client.event.network.NetworkState"
  abstract="false"
@@ -877,17 +843,6 @@
 >
 </method>
 <method name="getUser"
- return="com.nexmo.sdk.conversation.client.User"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getUser"
  return="void"
  abstract="false"
  native="false"
@@ -901,6 +856,17 @@
 </parameter>
 <parameter name="userInfoListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.User&gt;">
 </parameter>
+</method>
+<method name="getUser"
+ return="com.nexmo.sdk.conversation.client.User"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
 </method>
 <method name="invitedEvent"
  return="com.nexmo.sdk.conversation.client.EventSource&lt;com.nexmo.sdk.conversation.client.event.container.Invitation&gt;"
@@ -971,7 +937,7 @@
 >
 <parameter name="token" type="java.lang.String">
 </parameter>
-<parameter name="loginListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.User&gt;">
+<parameter name="loginListener" type="com.nexmo.sdk.conversation.client.event.LoginListener">
 </parameter>
 </method>
 <method name="logout"
@@ -1441,233 +1407,6 @@
  deprecated="not deprecated"
  visibility="public"
 >
-</method>
-</class>
-<class name="ConversationSignalingChannel"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="disableAudio"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getConversation"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="conversation" type="com.nexmo.sdk.conversation.client.Conversation">
-</parameter>
-<parameter name="requestHandler" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Conversation&gt;">
-</parameter>
-</method>
-<method name="getLoggedInUser"
- return="com.nexmo.sdk.conversation.client.User"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="invite"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="conversationId" type="java.lang.String">
-</parameter>
-<parameter name="username" type="java.lang.String">
-</parameter>
-<parameter name="inviteSendListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Member&gt;">
-</parameter>
-</method>
-<method name="isAudioEnabled"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="logout"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="logoutListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="newConversation"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="newConversationWithJoin"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="rtcEarmuff"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="isEarmuffed" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="rtcMute"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="isMute" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="rtcNew"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="SDP" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="rtcTerminate"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="rtcId" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="sendImage"
- return="com.nexmo.sdk.conversation.core.networking.ImageUploader.CancelableCall"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="conversation" type="com.nexmo.sdk.conversation.client.Conversation">
-</parameter>
-<parameter name="imagePath" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="sendText"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="conversation" type="com.nexmo.sdk.conversation.client.Conversation">
-</parameter>
-<parameter name="message" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
 </method>
 </class>
 <class name="DeliveredReceipt"
@@ -2822,19 +2561,6 @@
 <parameter name="leaveListener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.Void&gt;">
 </parameter>
 </method>
-<method name="setName"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-</method>
 <method name="writeToParcel"
  return="void"
  abstract="false"
@@ -2946,62 +2672,6 @@
  synchronized="false"
  static="true"
  final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="MemberMedia"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="MemberMedia"
- type="com.nexmo.sdk.conversation.client.MemberMedia"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="member" type="com.nexmo.sdk.conversation.client.Member">
-</parameter>
-<parameter name="audioEnabled" type="boolean">
-</parameter>
-<parameter name="timestamp" type="java.util.Date">
-</parameter>
-</constructor>
-<method name="getMember"
- return="com.nexmo.sdk.conversation.client.Member"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getTimestamp"
- return="java.util.Date"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="isAudioEnabled"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
  deprecated="not deprecated"
  visibility="public"
 >
@@ -3516,25 +3186,6 @@
  visibility="protected"
 >
 </constructor>
-<method name="createUser"
- return="com.nexmo.sdk.conversation.client.User"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="userId" type="java.lang.String">
-</parameter>
-<parameter name="name" type="java.lang.String">
-</parameter>
-<parameter name="displayName" type="java.lang.String">
-</parameter>
-<parameter name="imageUrl" type="java.lang.String">
-</parameter>
-</method>
 <method name="describeContents"
  return="int"
  abstract="false"
@@ -3560,28 +3211,6 @@
 </parameter>
 <exception name="JSONException" type="org.json.JSONException">
 </exception>
-</method>
-<method name="getDisplayName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getImageUrl"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
 </method>
 <method name="getName"
  return="java.lang.String"
@@ -3631,1546 +3260,6 @@
 >
 </field>
 </class>
-</package>
-<package name="com.nexmo.sdk.conversation.client.audio"
->
-<class name="AppRTCAudioManager"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="getAudioDevices"
- return="java.util.Set&lt;com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice&gt;"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getSelectedAudioDevice"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="selectAudioDevice"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="device" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
-</parameter>
-</method>
-<method name="setDefaultAudioDevice"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="defaultDevice" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
-</parameter>
-</method>
-<method name="start"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="audioManagerEvents" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioManagerEvents">
-</parameter>
-</method>
-<method name="stop"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="updateAudioDeviceState"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="AppRTCAudioManager.AudioDevice"
- extends="java.lang.Enum"
- abstract="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="valueOf"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-</method>
-<method name="values"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice[]"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<interface name="AppRTCAudioManager.AudioManagerEvents"
- abstract="true"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="onAudioDeviceChanged"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="selectedAudioDevice" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
-</parameter>
-<parameter name="availableAudioDevices" type="java.util.Set&lt;com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice&gt;">
-</parameter>
-</method>
-</interface>
-<class name="AppRTCAudioManager.AudioManagerState"
- extends="java.lang.Enum"
- abstract="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="valueOf"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioManagerState"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-</method>
-<method name="values"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioManagerState[]"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="AppRTCBluetoothManager"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="AppRTCBluetoothManager"
- type="com.nexmo.sdk.conversation.client.audio.AppRTCBluetoothManager"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-<parameter name="audioManager" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager">
-</parameter>
-</constructor>
-<method name="getAudioManager"
- return="android.media.AudioManager"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-</method>
-<method name="getBluetoothProfileProxy"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-<parameter name="listener" type="android.bluetooth.BluetoothProfile.ServiceListener">
-</parameter>
-<parameter name="profile" type="int">
-</parameter>
-</method>
-<method name="getState"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCBluetoothManager.State"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="hasPermission"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-<parameter name="permission" type="java.lang.String">
-</parameter>
-</method>
-<method name="logBluetoothAdapterInfo"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="localAdapter" type="android.bluetooth.BluetoothAdapter">
-</parameter>
-</method>
-<method name="registerReceiver"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="receiver" type="android.content.BroadcastReceiver">
-</parameter>
-<parameter name="filter" type="android.content.IntentFilter">
-</parameter>
-</method>
-<method name="start"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="startScoAudio"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="stop"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="stopScoAudio"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="unregisterReceiver"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<parameter name="receiver" type="android.content.BroadcastReceiver">
-</parameter>
-</method>
-<method name="updateDevice"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="AppRTCBluetoothManager.State"
- extends="java.lang.Enum"
- abstract="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="valueOf"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCBluetoothManager.State"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-</method>
-<method name="values"
- return="com.nexmo.sdk.conversation.client.audio.AppRTCBluetoothManager.State[]"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<interface name="AppRTCClient"
- abstract="true"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</interface>
-<class name="AppRTCClient.SignalingParameters"
- extends="java.lang.Object"
- abstract="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="SignalingParameters"
- type="com.nexmo.sdk.conversation.client.audio.AppRTCClient.SignalingParameters"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="turnServers" type="java.util.List&lt;PeerConnection.IceServer&gt;">
-</parameter>
-<parameter name="initiator" type="boolean">
-</parameter>
-<parameter name="offerSdp" type="SessionDescription">
-</parameter>
-<parameter name="iceCandidates" type="java.util.List&lt;IceCandidate&gt;">
-</parameter>
-</constructor>
-<field name="iceCandidates"
- type="java.util.List"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="initiator"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="offerSdp"
- type="SessionDescription"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="turnServers"
- type="java.util.List"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="AppRTCProximitySensor"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="onAccuracyChanged"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sensor" type="android.hardware.Sensor">
-</parameter>
-<parameter name="accuracy" type="int">
-</parameter>
-</method>
-<method name="onSensorChanged"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="event" type="android.hardware.SensorEvent">
-</parameter>
-</method>
-<method name="sensorReportsNearState"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="start"
- return="boolean"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="stop"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="AppRTCUtils"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="assertIsTrue"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="condition" type="boolean">
-</parameter>
-</method>
-<method name="getThreadInfo"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="logDeviceInfo"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="tag" type="java.lang.String">
-</parameter>
-</method>
-</class>
-<interface name="AudioCallEventListener"
- abstract="true"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="onAudioRouteChange"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="device" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
-</parameter>
-</method>
-<method name="onCallConnected"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onCallEnded"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onGeneralCallError"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="apiError" type="com.nexmo.sdk.conversation.client.event.NexmoAPIError">
-</parameter>
-</method>
-<method name="onRinging"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</interface>
-<class name="AudioCallManager"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<implements name="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient.PeerConnectionEvents">
-</implements>
-<implements name="com.nexmo.sdk.conversation.client.audio.RtcEvents">
-</implements>
-<constructor name="AudioCallManager"
- type="com.nexmo.sdk.conversation.client.audio.AudioCallManager"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-<parameter name="conversationId" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="conversationSignalingChannel" type="com.nexmo.sdk.conversation.client.ConversationSignalingChannel">
-</parameter>
-</constructor>
-<method name="disable"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.Void&gt;">
-</parameter>
-</method>
-<method name="earmuff"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="isEarmuff" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="enable"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.audio.AudioCallEventListener">
-</parameter>
-</method>
-<method name="getAvailableAudioRoutes"
- return="java.util.Set&lt;com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice&gt;"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getState"
- return="com.nexmo.sdk.conversation.client.audio.AudioCallManager.AudioCallState"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="mute"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="isMute" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler">
-</parameter>
-</method>
-<method name="onAnswer"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sdp" type="SessionDescription">
-</parameter>
-</method>
-<method name="onIceCandidate"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidate" type="IceCandidate">
-</parameter>
-</method>
-<method name="onIceCandidatesRemoved"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidates" type="IceCandidate[]">
-</parameter>
-</method>
-<method name="onIceConnected"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onIceDisconnected"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onIceGatheringDone"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onInviteToAudioCallComplete"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onLocalDescription"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sdp" type="SessionDescription">
-</parameter>
-</method>
-<method name="onPeerConnectionClosed"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onPeerConnectionError"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="description" type="java.lang.String">
-</parameter>
-</method>
-<method name="onPeerConnectionStatsReady"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="reports" type="StatsReport[]">
-</parameter>
-</method>
-<method name="setAudioRoute"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="audioRoute" type="com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice">
-</parameter>
-</method>
-<method name="updateRtcId"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="rtcId" type="java.lang.String">
-</parameter>
-</method>
-</class>
-<class name="AudioCallManager.AudioCallState"
- extends="java.lang.Enum"
- abstract="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="valueOf"
- return="com.nexmo.sdk.conversation.client.audio.AudioCallManager.AudioCallState"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="name" type="java.lang.String">
-</parameter>
-</method>
-<method name="values"
- return="com.nexmo.sdk.conversation.client.audio.AudioCallManager.AudioCallState[]"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</class>
-<class name="Config"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="Config"
- type="com.nexmo.sdk.conversation.client.audio.Config"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</constructor>
-<field name="TURN_SERVER_URL"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;turn:138.68.169.35:3478?transport=tcp&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="TURN_SERVER_URL_GOOGLE"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;stun:stun.l.google.com:19302&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="PeerConnectionClient"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="PeerConnectionClient"
- type="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</constructor>
-<method name="addRemoteIceCandidate"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidate" type="IceCandidate">
-</parameter>
-</method>
-<method name="close"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="createAnswer"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="createOffer"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="createPeerConnection"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="signalingParameters" type="com.nexmo.sdk.conversation.client.audio.AppRTCClient.SignalingParameters">
-</parameter>
-</method>
-<method name="createPeerConnectionFactory"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="context" type="android.content.Context">
-</parameter>
-<parameter name="peerConnectionParameters" type="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient.PeerConnectionParameters">
-</parameter>
-<parameter name="events" type="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient.PeerConnectionEvents">
-</parameter>
-</method>
-<method name="enableStatsEvents"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="enable" type="boolean">
-</parameter>
-<parameter name="periodMs" type="int">
-</parameter>
-</method>
-<method name="getLocalDescription"
- return="SessionDescription"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="removeRemoteIceCandidates"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidates" type="IceCandidate[]">
-</parameter>
-</method>
-<method name="setAudioEnabled"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="enable" type="boolean">
-</parameter>
-</method>
-<method name="setRemoteDescription"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sdp" type="SessionDescription">
-</parameter>
-</method>
-<field name="AUDIO_TRACK_ID"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;ARDAMSa0&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="PeerConnectionClient.DataChannelParameters"
- extends="java.lang.Object"
- abstract="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="DataChannelParameters"
- type="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient.DataChannelParameters"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="ordered" type="boolean">
-</parameter>
-<parameter name="maxRetransmitTimeMs" type="int">
-</parameter>
-<parameter name="maxRetransmits" type="int">
-</parameter>
-<parameter name="protocol" type="java.lang.String">
-</parameter>
-<parameter name="negotiated" type="boolean">
-</parameter>
-<parameter name="id" type="int">
-</parameter>
-</constructor>
-<field name="id"
- type="int"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="maxRetransmitTimeMs"
- type="int"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="maxRetransmits"
- type="int"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="negotiated"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="ordered"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="protocol"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<interface name="PeerConnectionClient.PeerConnectionEvents"
- abstract="true"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="onIceCandidate"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidate" type="IceCandidate">
-</parameter>
-</method>
-<method name="onIceCandidatesRemoved"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="candidates" type="IceCandidate[]">
-</parameter>
-</method>
-<method name="onIceConnected"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onIceDisconnected"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onIceGatheringDone"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onLocalDescription"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sdp" type="SessionDescription">
-</parameter>
-</method>
-<method name="onPeerConnectionClosed"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="onPeerConnectionError"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="description" type="java.lang.String">
-</parameter>
-</method>
-<method name="onPeerConnectionStatsReady"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="reports" type="StatsReport[]">
-</parameter>
-</method>
-</interface>
-<class name="PeerConnectionClient.PeerConnectionParameters"
- extends="java.lang.Object"
- abstract="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="PeerConnectionParameters"
- type="com.nexmo.sdk.conversation.client.audio.PeerConnectionClient.PeerConnectionParameters"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="tracing" type="boolean">
-</parameter>
-<parameter name="audioStartBitrate" type="int">
-</parameter>
-<parameter name="audioCodec" type="java.lang.String">
-</parameter>
-<parameter name="noAudioProcessing" type="boolean">
-</parameter>
-<parameter name="aecDump" type="boolean">
-</parameter>
-<parameter name="useOpenSLES" type="boolean">
-</parameter>
-<parameter name="disableBuiltInAEC" type="boolean">
-</parameter>
-<parameter name="disableBuiltInAGC" type="boolean">
-</parameter>
-<parameter name="disableBuiltInNS" type="boolean">
-</parameter>
-<parameter name="enableLevelControl" type="boolean">
-</parameter>
-<parameter name="disableWebRtcAGCAndHPF" type="boolean">
-</parameter>
-</constructor>
-<field name="aecDump"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="audioCodec"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="audioStartBitrate"
- type="int"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="disableBuiltInAEC"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="disableBuiltInAGC"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="disableBuiltInNS"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="disableWebRtcAGCAndHPF"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="enableLevelControl"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="noAudioProcessing"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="tracing"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="useOpenSLES"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<interface name="RtcEvents"
- abstract="true"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<method name="onAnswer"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="sdp" type="SessionDescription">
-</parameter>
-</method>
-<method name="onInviteToAudioCallComplete"
- return="void"
- abstract="true"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-</interface>
 </package>
 <package name="com.nexmo.sdk.conversation.client.event"
 >
@@ -5262,6 +3351,19 @@
 <parameter name="member" type="com.nexmo.sdk.conversation.client.Member">
 </parameter>
 </method>
+<method name="onImageReceived"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="image" type="com.nexmo.sdk.conversation.client.Image">
+</parameter>
+</method>
 <method name="onTextDeleted"
  return="void"
  abstract="true"
@@ -5275,6 +3377,19 @@
 <parameter name="message" type="com.nexmo.sdk.conversation.client.Text">
 </parameter>
 <parameter name="member" type="com.nexmo.sdk.conversation.client.Member">
+</parameter>
+</method>
+<method name="onTextReceived"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="message" type="com.nexmo.sdk.conversation.client.Text">
 </parameter>
 </method>
 </interface>
@@ -5383,6 +3498,51 @@
 </parameter>
 </constructor>
 </class>
+<interface name="LoginListener"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="com.nexmo.sdk.conversation.client.event.RequestHandler">
+</implements>
+<method name="onTokenExpired"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="onTokenInvalid"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="onUserAlreadyLoggedIn"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="user" type="com.nexmo.sdk.conversation.client.User">
+</parameter>
+</method>
+</interface>
 <class name="NexmoAPIError"
  extends="java.lang.Exception"
  abstract="false"
@@ -5434,41 +3594,6 @@
 </parameter>
 </constructor>
 <method name="alreadyConnecting"
- return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="audioAlreadyInProgress"
- return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="audioGeneralCallError"
- return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="description" type="java.lang.String">
-</parameter>
-</method>
-<method name="audioMissingPermissions"
  return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
  abstract="false"
  native="false"
@@ -5590,17 +3715,6 @@
 <parameter name="conversationId" type="java.lang.String">
 </parameter>
 </method>
-<method name="onUserAlreadyLoggedIn"
- return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
- abstract="false"
- native="false"
- synchronized="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
 <method name="permissionRequired"
  return="com.nexmo.sdk.conversation.client.event.NexmoAPIError"
  abstract="false"
@@ -5629,39 +3743,6 @@
 <parameter name="conversationId" type="java.lang.String">
 </parameter>
 </method>
-<field name="AUDIO_ALREADY_IN_PROGRESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:already-connecting&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_GENERAL_CALL_ERROR"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:general-error&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_MISSING_PERMISSIONS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:missing-permissions&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
 <field name="CONNECT_ALREADY_IN_PROGRESS"
  type="java.lang.String"
  transient="false"
@@ -5782,17 +3863,6 @@
  visibility="public"
 >
 </field>
-<field name="USER_ALREADY_LOGGED_IN"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;login:user-already-loggedin&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
 </class>
 <interface name="RequestHandler"
  abstract="true"
@@ -5863,22 +3933,6 @@
 <parameter name="invitedBy" type="java.lang.String">
 </parameter>
 </constructor>
-<constructor name="Invitation"
- type="com.nexmo.sdk.conversation.client.event.container.Invitation"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="conversation" type="com.nexmo.sdk.conversation.client.Conversation">
-</parameter>
-<parameter name="invitedMember" type="com.nexmo.sdk.conversation.client.Member">
-</parameter>
-<parameter name="invitedBy" type="java.lang.String">
-</parameter>
-<parameter name="isAudioEnabled" type="boolean">
-</parameter>
-</constructor>
 <method name="getConversation"
  return="com.nexmo.sdk.conversation.client.Conversation"
  abstract="false"
@@ -5903,17 +3957,6 @@
 </method>
 <method name="getInvitedMember"
  return="com.nexmo.sdk.conversation.client.Member"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="isAudioEnabled"
- return="boolean"
  abstract="false"
  native="false"
  synchronized="false"
@@ -6343,673 +4386,6 @@
 </method>
 </class>
 </package>
-<package name="com.nexmo.sdk.conversation.core.client.request"
->
-<class name="InviteWithAudioRequest"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="InviteWithAudioRequest"
- type="com.nexmo.sdk.conversation.core.client.request.InviteWithAudioRequest"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="userId" type="java.lang.String">
-</parameter>
-<parameter name="username" type="java.lang.String">
-</parameter>
-<parameter name="isMuted" type="boolean">
-</parameter>
-<parameter name="isEarmuff" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;com.nexmo.sdk.conversation.client.Member&gt;">
-</parameter>
-</constructor>
-<field name="audioInvitation"
- type="com.nexmo.sdk.conversation.core.client.request.InviteWithAudioRequest.AudioInvitation"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="isEarmuff"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="isMuted"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="userId"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="username"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="InviteWithAudioRequest.AudioInvitation"
- extends="java.lang.Object"
- abstract="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="AudioInvitation"
- type="com.nexmo.sdk.conversation.core.client.request.InviteWithAudioRequest.AudioInvitation"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="isMuted" type="boolean">
-</parameter>
-<parameter name="isEarmuff" type="boolean">
-</parameter>
-</constructor>
-</class>
-</package>
-<package name="com.nexmo.sdk.conversation.core.client.request.audio"
->
-<class name="AudioEarmuffRequest"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="AudioEarmuffRequest"
- type="com.nexmo.sdk.conversation.core.client.request.audio.AudioEarmuffRequest"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="earmuffed" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.String&gt;">
-</parameter>
-</constructor>
-<method name="getRequestName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getSuccessEventName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="makeJson"
- return="org.json.JSONObject"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<method name="parse"
- return="java.lang.Void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="jsonObject" type="org.json.JSONObject">
-</parameter>
-<parameter name="body" type="org.json.JSONObject">
-</parameter>
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<field name="AUDIO_EARMUFF_OFF_REQUEST"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:earmuff:off&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_EARMUFF_OFF_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:earmuff:off:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_EARMUFF_ON_REQUEST"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:earmuff:on&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_EARMUFF_ON_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:earmuff:on:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="earmuffed"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="memberId"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="AudioMuteRequest"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="AudioMuteRequest"
- type="com.nexmo.sdk.conversation.core.client.request.audio.AudioMuteRequest"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="muted" type="boolean">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.String&gt;">
-</parameter>
-</constructor>
-<method name="getRequestName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getSuccessEventName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="makeJson"
- return="org.json.JSONObject"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<method name="parse"
- return="java.lang.Void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="jsonObject" type="org.json.JSONObject">
-</parameter>
-<parameter name="body" type="org.json.JSONObject">
-</parameter>
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<field name="AUDIO_MUTE_OFF"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:mute:off&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_MUTE_OFF_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:mute:off:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_MUTE_ON"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:mute:on&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="AUDIO_MUTE_ON_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;audio:mute:on:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="memberId"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="muted"
- type="boolean"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="RtcNewRequest"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="RtcNewRequest"
- type="com.nexmo.sdk.conversation.core.client.request.audio.RtcNewRequest"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="SDP" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.String&gt;">
-</parameter>
-</constructor>
-<method name="getRequestName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getSuccessEventName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="makeJson"
- return="org.json.JSONObject"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<method name="parse"
- return="com.nexmo.sdk.conversation.core.client.request.audio.RtcNewRequest.RtcNewResponse"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="jsonObject" type="org.json.JSONObject">
-</parameter>
-<parameter name="body" type="org.json.JSONObject">
-</parameter>
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<field name="RTC_NEW_REQUEST"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;rtc:new&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="RTC_NEW_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;rtc:new:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="memberId"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="sdpOffer"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="RtcNewRequest.RtcNewResponse"
- extends="java.lang.Object"
- abstract="false"
- static="true"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="RtcNewResponse"
- type="com.nexmo.sdk.conversation.core.client.request.audio.RtcNewRequest.RtcNewResponse"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="rtc_id" type="java.lang.String">
-</parameter>
-<parameter name="stream_id" type="java.lang.String">
-</parameter>
-</constructor>
-<field name="rtc_id"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="stream_id"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-<class name="RtcTerminateRequest"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="RtcTerminateRequest"
- type="com.nexmo.sdk.conversation.core.client.request.audio.RtcTerminateRequest"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="cid" type="java.lang.String">
-</parameter>
-<parameter name="memberId" type="java.lang.String">
-</parameter>
-<parameter name="rtc_id" type="java.lang.String">
-</parameter>
-<parameter name="listener" type="com.nexmo.sdk.conversation.client.event.RequestHandler&lt;java.lang.String&gt;">
-</parameter>
-</constructor>
-<method name="getRequestName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getSuccessEventName"
- return="java.lang.String"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="makeJson"
- return="org.json.JSONObject"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="protected"
->
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<method name="parse"
- return="java.lang.Void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="jsonObject" type="org.json.JSONObject">
-</parameter>
-<parameter name="body" type="org.json.JSONObject">
-</parameter>
-<exception name="JSONException" type="org.json.JSONException">
-</exception>
-</method>
-<field name="RTC_TERMINATE_REQUEST"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;rtc:terminate&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="RTC_TERMINATE_SUCCESS"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;rtc:terminate:success&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="memberId"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="rtc_id"
- type="java.lang.String"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-</class>
-</package>
 <package name="com.nexmo.sdk.conversation.core.networking"
 >
 <class name="Constants"
@@ -7303,10 +4679,77 @@
 <parameter name="message" type="RemoteMessage">
 </parameter>
 </method>
-<field name="TAG"
+<field name="ACTION_BROADCAST_CID"
  type="java.lang.String"
  transient="false"
  volatile="false"
+ value="&quot;com.nexmo.sdk.core.gcm.BROADCAST_CID&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="CONVERSATION_PUSH_ACTION"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;com.nexmo.sdk.conversation.PUSH&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_KEY_CID"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;conversation_id&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_KEY_TITLE"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;title&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_TYPE_IMAGE"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;image&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_TYPE_INVITE"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;member:invited&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_TYPE_TEXT"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;text&quot;"
  static="true"
  final="true"
  deprecated="not deprecated"
@@ -7379,17 +4822,6 @@
  transient="false"
  volatile="false"
  value="&quot;conversation.sdk.push.text&quot;"
- static="true"
- final="true"
- deprecated="not deprecated"
- visibility="public"
->
-</field>
-<field name="CONVERSATION_PUSH_ACTION"
- type="java.lang.String"
- transient="false"
- volatile="false"
- value="&quot;com.nexmo.sdk.conversation.PUSH&quot;"
  static="true"
  final="true"
  deprecated="not deprecated"

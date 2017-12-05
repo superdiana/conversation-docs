@@ -143,8 +143,6 @@
     <li class="selected api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/package-summary.html">com.nexmo.sdk.conversation.client</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/client/audio/package-summary.html">com.nexmo.sdk.conversation.client.audio</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/package-summary.html">com.nexmo.sdk.conversation.client.event</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/container/package-summary.html">com.nexmo.sdk.conversation.client.event.container</a></li>
@@ -156,10 +154,6 @@
   <a href="../../../../../com/nexmo/sdk/conversation/config/package-summary.html">com.nexmo.sdk.conversation.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/package-summary.html">com.nexmo.sdk.conversation.core</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/package-summary.html">com.nexmo.sdk.conversation.core.client.request</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/audio/package-summary.html">com.nexmo.sdk.conversation.core.client.request.audio</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/networking/package-summary.html">com.nexmo.sdk.conversation.core.networking</a></li>
     <li class="api apilevel-">
@@ -185,7 +179,6 @@
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ImageRepresentation.html">ImageRepresentation</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a></li>
-          <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ReceiptRecord.html">ReceiptRecord</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/SeenReceipt.html">SeenReceipt</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a></li>
@@ -257,12 +250,15 @@ Summary:
 
 
 
+  <a href="#constants">Constants</a>
+  
 
 
 
 
 
-  <a href="#proctors">Protected Ctors</a>
+
+  &#124; <a href="#proctors">Protected Ctors</a>
   
 
 
@@ -371,15 +367,31 @@ Summary:
  </pre>
  </p>
 
- <p>Listen for incoming events <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#messageEvent()">messageEvent()</a></code> </p>
+ <p>Listen for incoming text and image events <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#addEventListener(com.nexmo.sdk.conversation.client.event.EventListener)">addEventListener(EventListener)</a></code></p>
  <p>Example usage:</p>
  <pre>
-   conversation.messageEvent().add(new ResultListener<Event>() {
-    &#64;Override
-    public void onSuccess(Event result) {
-        notifyUI("New event from " + result.getMember());
-    }
-  });
+     myConversation.addEventListener(new EventListener() {
+         &#64;Override
+         public void onTextReceived(Event event) {
+              // Update the application UI here if needed.
+         }
+         &#64;Override
+         public void onTextDeleted(Event event) {
+              // Update the application UI here if needed.
+         }
+         &#64;Override
+         public void onImageReceived(Event event) {
+              // Update the application UI here if needed.
+         }
+         &#64;Override
+         public void onImageDeleted(Event event) {
+              // Update the application UI here if needed.
+         }
+         &#64;Override
+         public void onImageDownloaded(Image image) {
+              // Update the application UI here if needed.
+         }
+     });
  </pre>
 
  <p>Sending a text message to a specific conversation is achieved using
@@ -461,6 +473,22 @@ Summary:
 
 
 
+
+
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+<table id="constants" class="jd-sumtable"><tr><th colspan="12">Constants</th></tr>
+
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">int</td>
+        <td class="jd-linkcol"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#NEED_PERMISSIONS">NEED_PERMISSIONS</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+
+</table>
 
 
 
@@ -677,24 +705,6 @@ Summary:
             
             
             
-            <a href="../../../../../com/nexmo/sdk/conversation/client/audio/AudioCallManager.html">AudioCallManager</a>
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#audio()">audio</a></span>()
-        
-        <div class="jd-descrdiv">Get Audio manager.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
             void
         </td>
         <td class="jd-linkcol" width="100%">
@@ -706,7 +716,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -724,7 +734,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -740,7 +750,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -758,7 +768,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -776,7 +786,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -792,7 +802,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -810,7 +820,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -828,7 +838,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -846,7 +856,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -864,7 +874,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -882,7 +892,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -900,7 +910,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -918,7 +928,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -934,7 +944,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -952,7 +962,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -970,7 +980,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -988,7 +998,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1006,7 +1016,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1024,7 +1034,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1042,7 +1052,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1058,7 +1068,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1071,24 +1081,6 @@ Summary:
         <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#invite(java.lang.String, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.Member>)">invite</a></span>(String username, <a href="../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a>&gt; inviteSendListener)
         
         <div class="jd-descrdiv">Invite a user to a certain conversation.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#inviteWithAudio(java.lang.String, java.lang.String, boolean, boolean, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.Member>)">inviteWithAudio</a></span>(String userId, String username, boolean muted, boolean isEarmuff, <a href="../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a>&gt; requestHandler)
-        
-        <div class="jd-descrdiv">Invite a user to an audio conversation, using preset params for muted and earmuff.</div>
   
   </td></tr>
 
@@ -1209,24 +1201,6 @@ Summary:
             
             
             
-            <a href="../../../../../com/nexmo/sdk/conversation/client/EventSource.html">EventSource</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a>&gt;
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#memberMediaEvent()">memberMediaEvent</a></span>()
-        
-        <div class="jd-descrdiv">Register for receiving member media related events.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
             <a href="../../../../../com/nexmo/sdk/conversation/client/EventSource.html">EventSource</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/Event.html">Event</a>&gt;
         </td>
         <td class="jd-linkcol" width="100%">
@@ -1238,7 +1212,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1256,7 +1230,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1274,7 +1248,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1292,7 +1266,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1306,22 +1280,6 @@ Summary:
         
         <div class="jd-descrdiv">Send a Text event to a conversation.</div>
   
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#setAudioRoute(com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice)">setAudioRoute</a></span>(<a href="../../../../../com/nexmo/sdk/conversation/client/audio/AppRTCAudioManager.AudioDevice.html">AppRTCAudioManager.AudioDevice</a> audioRoute)
-        
   </td></tr>
 
 
@@ -1697,6 +1655,53 @@ From class
 <!-- Constants -->
 
 
+<!-- ========= ENUM CONSTANTS DETAIL ======== -->
+<h2>Constants</h2>
+
+
+
+
+<a id="NEED_PERMISSIONS"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        int
+      </span>
+        NEED_PERMISSIONS
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                100
+                (0x00000064)
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+
 <!-- Fields -->
 
 
@@ -2066,43 +2071,6 @@ From class
 </td>
         </tr>
       </table>
-  </div>
-
-    </div>
-</div>
-
-
-<a id="audio()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../com/nexmo/sdk/conversation/client/audio/AudioCallManager.html">AudioCallManager</a>
-      </span>
-      <span class="sympad">audio</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Get Audio manager.
- <p>In order to enable audio in a conversation perform Conversation#audio()#enable(AudioCallEventListener)</p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Audio manager.
-</li></ul>
   </div>
 
     </div>
@@ -2945,9 +2913,7 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Invite a user to a certain conversation.
- The receiving  user can accept an invite <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#join(com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.Member>)">join(RequestHandler)</a></code> or reject an invite
- <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#leave(com.nexmo.sdk.conversation.client.event.RequestHandler<java.lang.Void>)">leave(RequestHandler)</a></code>.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Invite a user to a certain conversation.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -2957,70 +2923,6 @@ From class
         </tr>
         <tr>
           <th>inviteSendListener</th>
-          <td>The completion listener.
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<a id="inviteWithAudio(java.lang.String, java.lang.String, boolean, boolean, com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.Member>)"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">inviteWithAudio</span>
-      <span class="normal">(String userId, String username, boolean muted, boolean isEarmuff, <a href="../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a>&gt; requestHandler)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Invite a user to an audio conversation, using preset params for muted and earmuff.
- Invite by either userId or username, providing one of this params is mandatory.
-
- The receiving  user can accept an invite <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#join(com.nexmo.sdk.conversation.client.event.RequestHandler<com.nexmo.sdk.conversation.client.Member>)">join(RequestHandler)</a></code> or reject an invite
- <code><a href="../../../../../com/nexmo/sdk/conversation/client/Conversation.html#leave(com.nexmo.sdk.conversation.client.event.RequestHandler<java.lang.Void>)">leave(RequestHandler)</a></code>.
-
- <p>A user accepting an invite to a conversation with audio enabled will need to manually
- enable audio after accepting invitation.</p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>userId</th>
-          <td>The user id.</td>
-        </tr>
-        <tr>
-          <th>username</th>
-          <td>The user name.</td>
-        </tr>
-        <tr>
-          <th>muted</th>
-          <td>The user will join as muted or not.</td>
-        </tr>
-        <tr>
-          <th>isEarmuff</th>
-          <td>The user will join as earmuff or not.</td>
-        </tr>
-        <tr>
-          <th>requestHandler</th>
           <td>The completion listener.
 </td>
         </tr>
@@ -3273,44 +3175,6 @@ From class
 </div>
 
 
-<a id="memberMediaEvent()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../com/nexmo/sdk/conversation/client/EventSource.html">EventSource</a>&lt;<a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a>&gt;
-      </span>
-      <span class="sympad">memberMediaEvent</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Register for receiving member media related events.
- Typically when a member enables/disables audio with <code><a href="../../../../../com/nexmo/sdk/conversation/client/audio/AudioCallManager.html#enable(com.nexmo.sdk.conversation.client.audio.AudioCallEventListener)">enable(AudioCallEventListener)</a></code>
- and <code><a href="../../../../../com/nexmo/sdk/conversation/client/audio/AudioCallManager.html#disable(com.nexmo.sdk.conversation.client.event.RequestHandler<java.lang.Void>)">disable(RequestHandler)</a></code>.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The listener in charge of dispatching the result.
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
 <a id="messageEvent()"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -3337,8 +3201,6 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Listen for incoming messages from this conversation.
-
- <p> For incoming <code><a href="../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></code>  event, the THUMBNAIL representation will be downloaded automatically.</p>
 
 </p></div>
 
@@ -3535,37 +3397,6 @@ From class
         </tr>
       </table>
   </div>
-
-    </div>
-</div>
-
-
-<a id="setAudioRoute(com.nexmo.sdk.conversation.client.audio.AppRTCAudioManager.AudioDevice)"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setAudioRoute</span>
-      <span class="normal">(<a href="../../../../../com/nexmo/sdk/conversation/client/audio/AppRTCAudioManager.AudioDevice.html">AppRTCAudioManager.AudioDevice</a> audioRoute)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>

@@ -143,8 +143,6 @@
     <li class="selected api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/package-summary.html">com.nexmo.sdk.conversation.client</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/client/audio/package-summary.html">com.nexmo.sdk.conversation.client.audio</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/package-summary.html">com.nexmo.sdk.conversation.client.event</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/container/package-summary.html">com.nexmo.sdk.conversation.client.event.container</a></li>
@@ -156,10 +154,6 @@
   <a href="../../../../../com/nexmo/sdk/conversation/config/package-summary.html">com.nexmo.sdk.conversation.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/package-summary.html">com.nexmo.sdk.conversation.core</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/package-summary.html">com.nexmo.sdk.conversation.core.client.request</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/audio/package-summary.html">com.nexmo.sdk.conversation.core.client.request.audio</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/networking/package-summary.html">com.nexmo.sdk.conversation.core.networking</a></li>
     <li class="api apilevel-">
@@ -185,7 +179,6 @@
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ImageRepresentation.html">ImageRepresentation</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a></li>
-          <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ReceiptRecord.html">ReceiptRecord</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/SeenReceipt.html">SeenReceipt</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a></li>
@@ -372,12 +365,24 @@ Summary:
  You use this SDK to add and remove users to a Conversation. A member is a User who has joined a Conversation.
  The following code example shows how to add a User to a Conversation:
  <pre>
- client.login(token, new RequestHandler<User> {
+ client.login(token, new LoginListener() {
          &#64;Override
          public void onSuccess(User user) {
              Log.d(TAG, "onSuccess " + user.toString());
              self = user;
              // can update UI user info for ex.
+         }
+
+         &#64;Override
+         public void onUserAlreadyLoggedIn(User user) {
+         }
+
+         &#64;Override
+         public void onTokenInvalid() {
+         }
+
+         &#64;Override
+         public void onTokenExpired() {
          }
 
          &#64;Override
@@ -601,22 +606,6 @@ android.os.Parcelable
             
             
             
-            static
-            
-            <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/User.html#createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">createUser</a></span>(String userId, String name, String displayName, String imageUrl)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
             
             
             int
@@ -628,7 +617,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -644,7 +633,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -662,39 +651,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            String
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/User.html#getDisplayName()">getDisplayName</a></span>()
-        
-  </td></tr>
-
-
-	 
     <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            String
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/User.html#getImageUrl()">getImageUrl</a></span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -710,7 +667,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -726,7 +683,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -742,7 +699,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -758,7 +715,7 @@ android.os.Parcelable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1262,37 +1219,6 @@ From interface
 
 
 
-<a id="createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-        static 
-         
-         
-         
-        <a href="../../../../../com/nexmo/sdk/conversation/client/User.html">User</a>
-      </span>
-      <span class="sympad">createUser</span>
-      <span class="normal">(String userId, String name, String displayName, String imageUrl)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
 <a id="describeContents()"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -1400,68 +1326,6 @@ From interface
         </tr>
       </table>
   </div>
-
-    </div>
-</div>
-
-
-<a id="getDisplayName()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getDisplayName</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<a id="getImageUrl()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getImageUrl</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>

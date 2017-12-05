@@ -143,8 +143,6 @@
     <li class="selected api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/package-summary.html">com.nexmo.sdk.conversation.client</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/client/audio/package-summary.html">com.nexmo.sdk.conversation.client.audio</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/package-summary.html">com.nexmo.sdk.conversation.client.event</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/client/event/container/package-summary.html">com.nexmo.sdk.conversation.client.event.container</a></li>
@@ -156,10 +154,6 @@
   <a href="../../../../../com/nexmo/sdk/conversation/config/package-summary.html">com.nexmo.sdk.conversation.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/package-summary.html">com.nexmo.sdk.conversation.core</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/package-summary.html">com.nexmo.sdk.conversation.core.client.request</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/nexmo/sdk/conversation/core/client/request/audio/package-summary.html">com.nexmo.sdk.conversation.core.client.request.audio</a></li>
     <li class="api apilevel-">
   <a href="../../../../../com/nexmo/sdk/conversation/core/networking/package-summary.html">com.nexmo.sdk.conversation.core.networking</a></li>
     <li class="api apilevel-">
@@ -185,7 +179,6 @@
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ImageRepresentation.html">ImageRepresentation</a></li>
           <li class="selected api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a></li>
-          <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/MemberMedia.html">MemberMedia</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/ReceiptRecord.html">ReceiptRecord</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/SeenReceipt.html">SeenReceipt</a></li>
           <li class="api apilevel-"><a href="../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a></li>
@@ -288,9 +281,6 @@ Summary:
   
 
 
-  &#124; <a href="#promethods">Protected Methods</a>
-  
-
 
   &#124; <a href="#inhmethods">Inherited Methods</a>
 
@@ -375,13 +365,20 @@ Summary:
 
  The following code example shows how to see which Member sent a text message:
  <pre>
-   conversation.messageEvent().add(new ResultListener<Event>() {
-    &#64;Override
-    public void onSuccess(Event result) {
-        notifyUI("New event from " + result.getMember());
-    }
-  });
- </pre></p>
+  conversation.addEventListener(new EventListener() {
+   &#64;Override
+   public void onTextReceived(Conversation conversation, Text message) {
+       Log.d(TAG, "onTextReceived " + message.getText() + " from : " + message.getMember.getMemberId());
+   }
+
+   &#64;Override
+   public void onTextDeleted(Conversation conversation, Text message, Member member) {
+       Log.d(TAG, "onTextDeleted by: " + member.getDisplayName());
+   }
+
+   //...other message events.
+   });
+</pre></p>
 
 
 
@@ -958,31 +955,6 @@ android.os.Parcelable
 </table>
 
 
-
-
-<!-- ========== METHOD SUMMARY =========== -->
-<table id="promethods" class="jd-sumtable"><tr><th colspan="12">Protected Methods</th></tr>
-
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../com/nexmo/sdk/conversation/client/Member.html#setName(java.lang.String)">setName</a></span>(String name)
-        
-  </td></tr>
-
-
-
-</table>
 
 
 
@@ -2145,42 +2117,6 @@ From interface
 
 
 <!-- ========= METHOD DETAIL ======== -->
-
-<h2>Protected Methods</h2>
-
-
-
-<a id="setName(java.lang.String)"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setName</span>
-      <span class="normal">(String name)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
 
 
 

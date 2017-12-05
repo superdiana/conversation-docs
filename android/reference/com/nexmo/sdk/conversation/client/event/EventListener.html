@@ -142,8 +142,6 @@
                 
     <li class="api apilevel-">
   <a href="../../../../../../com/nexmo/sdk/conversation/client/package-summary.html">com.nexmo.sdk.conversation.client</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/nexmo/sdk/conversation/client/audio/package-summary.html">com.nexmo.sdk.conversation.client.audio</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../com/nexmo/sdk/conversation/client/event/package-summary.html">com.nexmo.sdk.conversation.client.event</a></li>
     <li class="api apilevel-">
@@ -156,10 +154,6 @@
   <a href="../../../../../../com/nexmo/sdk/conversation/config/package-summary.html">com.nexmo.sdk.conversation.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/nexmo/sdk/conversation/core/package-summary.html">com.nexmo.sdk.conversation.core</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/nexmo/sdk/conversation/core/client/request/package-summary.html">com.nexmo.sdk.conversation.core.client.request</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/nexmo/sdk/conversation/core/client/request/audio/package-summary.html">com.nexmo.sdk.conversation.core.client.request.audio</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/nexmo/sdk/conversation/core/networking/package-summary.html">com.nexmo.sdk.conversation.core.networking</a></li>
     <li class="api apilevel-">
@@ -176,6 +170,7 @@
       <ul>
           <li class="selected api apilevel-"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/EventListener.html">EventListener</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/ImageDownloadListener.html">ImageDownloadListener</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/LoginListener.html">LoginListener</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/RequestHandler.html">RequestHandler</a>&lt;T&gt;</li>
           <li class="api apilevel-"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/ResultListener.html">ResultListener</a>&lt;T&gt;</li>
       </ul>
@@ -432,9 +427,45 @@ Summary:
             void
         </td>
         <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/EventListener.html#onImageReceived(com.nexmo.sdk.conversation.client.Image)">onImageReceived</a></span>(<a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a> image)
+        
+        <div class="jd-descrdiv">Incoming <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></code>.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">
+            abstract
+            
+            
+            
+            
+            void
+        </td>
+        <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/EventListener.html#onTextDeleted(com.nexmo.sdk.conversation.client.Text, com.nexmo.sdk.conversation.client.Member)">onTextDeleted</a></span>(<a href="../../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a> message, <a href="../../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a> member)
         
         <div class="jd-descrdiv">A Text was deleted.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            abstract
+            
+            
+            
+            
+            void
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/nexmo/sdk/conversation/client/event/EventListener.html#onTextReceived(com.nexmo.sdk.conversation.client.Text)">onTextReceived</a></span>(<a href="../../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a> message)
+        
+        <div class="jd-descrdiv">Incoming text message from a conversation.</div>
   
   </td></tr>
 
@@ -680,6 +711,56 @@ From interface
 </div>
 
 
+<a id="onImageReceived(com.nexmo.sdk.conversation.client.Image)"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        void
+      </span>
+      <span class="sympad">onImageReceived</span>
+      <span class="normal">(<a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a> image)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Incoming <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html">Image</a></code>. For any new image event, it's THHUMBNAIL representation will be
+ downloaded automatically.
+
+ <p>Get the associated bitmap via com.nexmo.sdk.conversation.client.ImageRepresentation#bitmap
+ for updating the UI.</p>
+
+ <p>There is also an option for manually downloading any image based on the image url, using
+ an image processing library of your choice from <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html#getOriginal()">getOriginal()</a></code> or
+ <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html#getMedium()">getMedium()</a></code> or <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Image.html#getThumbnail()">getThumbnail()</a></code>.
+ This will require custom authorization headers: <code><a href="../../../../../../com/nexmo/sdk/conversation/client/ConversationClient.html#ipsHeaders()">ipsHeaders()</a></code></p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>image</th>
+          <td>The incoming image event.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <a id="onTextDeleted(com.nexmo.sdk.conversation.client.Text, com.nexmo.sdk.conversation.client.Member)"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -716,6 +797,48 @@ From interface
         <tr>
           <th>member</th>
           <td>The member that removed the message.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<a id="onTextReceived(com.nexmo.sdk.conversation.client.Text)"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        void
+      </span>
+      <span class="sympad">onTextReceived</span>
+      <span class="normal">(<a href="../../../../../../com/nexmo/sdk/conversation/client/Text.html">Text</a> message)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Incoming text message from a conversation.
+ Might be a good idea to customize UI for own messages.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>message</th>
+          <td>The message itself, also containing the <code><a href="../../../../../../com/nexmo/sdk/conversation/client/Member.html">Member</a></code> information.
 </td>
         </tr>
       </table>
