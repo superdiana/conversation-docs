@@ -50,7 +50,7 @@ var NexmoClientError = ConversationClientError.NexmoClientError;
 
 /**
  * A single conversation Object.
- * @class Conversation
+ * @class Conversation 
  */
 var Conversation = function(application, params) {
 	this.application = application;
@@ -69,7 +69,7 @@ var Conversation = function(application, params) {
 	 * otherwise the value will be `null`.
 	 * @type Member
 	 */
-	this.me = null; // We are not in the conversation ourselves by default
+	this.me = null; // We are not in the conversation ourselves by default 
 	// Map the params (which includes the id)
 	this.updateObjectInstance(application, params);
 
@@ -97,7 +97,7 @@ Conversation.prototype.updateObjectInstance = function(application, params) {
 			case 'members':
 				//update the conversation javascript object
 
-				//CASE1 conversations:get:success,
+				//CASE1 conversations:get:success, 
 				//PATCH this responds with member[0].user_id and name
 
 				// Iterate the list
@@ -136,14 +136,14 @@ Conversation.prototype.updateObjectInstance = function(application, params) {
  * Join the given user to this conversation, will typically use this to join
  * ourselves to a conversation we create.
  * Accept an invitation if our member has state INVITED and no user_id / user_name is given
- *
+ * 
  * @param {Object} [params = self.application.me.id] The user to join (defaults to self)
  * @param {String} params.user_name the user_name of the user to join
  * @param {String} params.user_id the user_id of the user to join
  * @return {Promise&lt;Member>}
- *
+ * 
  * @example &lt;caption>join a user to a conversation&lt;/caption>
- *
+ * 
  * 		conversation.join()
  * 			.then(function(member) {
  * 				console.log("joined as member: ", member)
@@ -193,11 +193,11 @@ Conversation.prototype.join = function(params) {
 
 /**
  * Delete a conversation
- *
+ * 
  * @return {Promise}
- *
+ * 
  * @example &lt;caption>delete the conversation&lt;/caption>
- *
+ * 
  * 		conversation.del()
  * 			.then(function() {
  * 				console.log("conversation deleted");
@@ -225,7 +225,7 @@ Conversation.prototype.del = function() {
  * Delete an Event (e.g. Text)
  * @param {Event} event
  * @returns {Promise}
- *
+ * 
  */
 Conversation.prototype.deleteEvent = function(event) {
 	return event.deleteEvent(event.id);
@@ -235,9 +235,9 @@ Conversation.prototype.deleteEvent = function(event) {
  * Invite the given user (id or name) to this conversation
  * @param {Member} params
  * @param {String} [params.id or username] - the id or the username of the user to invite
- *
+ * 
  * @returns {Promise&lt;Member>}
- *
+ * 
  * @example &lt;caption>invite a user to a conversation&lt;/caption>
  *  var user_id = 'user to invite';
  *  var user_name = 'username to invite';
@@ -251,7 +251,7 @@ Conversation.prototype.deleteEvent = function(event) {
  *       }).catch(function(error) {
  *          console.log(error);
  *  });
- *
+ * 
  */
 Conversation.prototype.invite = function(params) {
 	if (!params || (!params.id &amp;&amp; !params.user_name)) return Promise.reject(new NexmoClientError('error:invite:missing:params'));
@@ -280,9 +280,43 @@ Conversation.prototype.invite = function(params) {
 };
 
 /**
+ * Invite the given user (id or name) to this conversation with media audio
+ * @param {Member} params
+ * @param {String} [params.id or username] - the id or the username of the user to invite
+ * 
+ * @returns {Promise&lt;Member>}
+ * 
+ * @example &lt;caption>invite a user to a conversation&lt;/caption>
+ *  var user_id = 'user to invite';
+ *  var user_name = 'username to invite';
+ *
+ *  conversation.inviteWithAudio({
+ *          id: user_id,
+ *          user_name: user_name
+ *      })
+ * 		.then(function(member) {
+ *            displayMessage(member.state + " user: " + user_id + " " + user_name);
+ *       }).catch(function(error) {
+ *          console.log(error);
+ *  });
+ * 
+ */
+Conversation.prototype.inviteWithAudio = function(params) {
+	if (!params || (!params.id &amp;&amp; !params.user_name)) return Promise.reject(new NexmoClientError('error:invite:missing:params'));
+	params.media = {
+		audio: {
+			muted: false,
+			earmuffed: false
+		}
+	}
+
+	return this.invite(params);
+}
+
+/**
  * Leave from the conversation
  * &lt;pre>
- *
+ * 
  * --> conversation:member:delete
  *      payload = {
  *           type: 'conversation:member:delete',
@@ -293,13 +327,13 @@ Conversation.prototype.invite = function(params) {
  *               "member_id": &amp;lt;member_id&amp;gt; //this is my member id
  *           }
  *      }
- *
+ * 
  * &lt;-- [ack] conversation:member:delete:success
- *
+ * 
  * &lt;-- conversation:member:delete
- *
+ * 
  * &lt;/pre>
- *
+ * 
  * @returns {Promise}
  */
 Conversation.prototype.leave = function() {
@@ -326,16 +360,16 @@ Conversation.prototype.leave = function() {
 /**
  * Send a text message to the conversation, which will be relayed to every other member of the conversation
  * @param {String} - text the text message to be sent
- *
- * @returns {Promise&lt;TextEvent>} - the text message that was sent
- *
+ * 
+ * @returns {Promise&lt;TextEvent>} - the text message that was sent 
+ * 
  * @example &lt;caption> sending a text &lt;/caption>
  *	conversation.sendText("Hi Nexmo").then(function(){
  *			console.log('message was sent');
  *		}).catch(function(error){
  *			console.log('error sending the message', error);
  *	});
- *
+ * 
  */
 Conversation.prototype.sendText = function(text) {
 	var self = this;
@@ -371,17 +405,17 @@ Conversation.prototype.sendText = function(text) {
 /**
  * Send an Image message to the conversation, which will be relayed to every other member of the conversation.
  * implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
- *
+ * 
  * @param {File} file single input file (jpeg/jpg)
  * @param {String} [params.quality_ratio = 100] a value between 0 and 100. 0 indicates 'maximum compression' and the lowest quality, 100 will result in the highest quality image
  * @param {String} [params.medium_size_ratio = 50] a value between 1 and 100. 1 indicates the new image is 1% of original, 100 - same size as origina
  * @param {String} [params.thumbnail_size_ratio = 10] a value between 1 and 100. 1 indicates the new image is 1% of original, 100 - same size as original
- *
+ * 
  * @returns {Promise&lt;XMLHttpRequest>}
- *
+ * 
  * @example &lt;caption>sending an image&lt;/caption>
- * conversation.sendImage(fileInput.files[0]).then(function(imageRequest){
- *
+ * conversation.sendImage(fileInput.files[0]).then(function(imageRequest){ 
+ *    
  *         imageRequest.onabort = function(e) {
  *            console.log(e);
  *          console.log("Image:" + e.type);
@@ -401,7 +435,7 @@ Conversation.prototype.sendImage = function(fileInput, params) {
 	var self = this;
 	var p = new Promise(function(resolve, reject) {
 		if (!localStorage.getItem("NXMO_user_data")) {
-			reject(new NexmoClientError("user:error:relogin"));
+			reject(new NexmoClientError("error:user:relogin"));
 		} else {
 			if (self.me === null) {
 				reject(new NexmoClientError("error:self"));
@@ -452,13 +486,13 @@ Conversation.prototype.sendImage = function(fileInput, params) {
 
 /**
  * Cancel sending an Image message to the conversation.
- *
- * @param {XMLHttpRequest} imageRequest
- *
+ * 
+ * @param {XMLHttpRequest} imageRequest 
+ * 
  * @returns void
- *
+ * 
  * @example &lt;caption>cancel sending an image&lt;/caption>
- * conversation.sendImage(fileInput.files[0]).then(function(imageRequest){
+ * conversation.sendImage(fileInput.files[0]).then(function(imageRequest){ 
  *    conversation.abortSendImage(imageRequest);
  * });
  */
@@ -513,10 +547,10 @@ var typing = function(state) {
  * Query the service to get a list of events in this conversation.
  *
  * @param {Object} [params] - leave empty to get all the events
- * @param {String} params.start_id - the id of the event to begin the batch
+ * @param {String} params.start_id - the id of the event to begin the batch 
  * @param {String} params.end_id - the id of the event to finish the batch
- *
- * @returns {Promise&lt;Array&lt;Event>>} - A promise to the Events list
+ * 
+ * @returns {Promise&lt;Array&lt;Event>>} - A promise to the Events list 
  */
 Conversation.prototype.getEvents = function(params) {
 	var self = this;
@@ -673,7 +707,7 @@ Conversation.prototype._handleEvent = function(event) {
 			self.events[event.id] = message;
 			self.emit(event.type, from, message);
 			if (self.application.session.cache &amp;&amp; self.application.session.cache.conversation_data[self.id]) {
-				self.application.session.cache.setConversationDirty(self.id, true); //temp fix for fixing member status on reload
+				self.application.session.cache.setConversationDirty(self.id, true); //temp fix for fixing member status on reload			
 			}
 			break;
 		case 'member:media':
@@ -691,9 +725,9 @@ Conversation.prototype._handleEvent = function(event) {
 			//no need to mark as dirty for typing indicators or seen events
 			//TODO move this in cache module
 			if (self.application.session.cache &amp;&amp; self.application.session.cache.conversation_data[self.id] &amp;&amp; [
-					"text:typing:on",
-					"text:typing:off"
-				].indexOf(event.type) === -1) {
+				"text:typing:on",
+				"text:typing:off"
+			].indexOf(event.type) === -1) {
 				self.application.session.cache.setConversationDirty(self.id, true);
 			}
 			if (event.cid === self.id) {
@@ -711,8 +745,7 @@ Conversation.prototype._handleEvent = function(event) {
 
 module.exports = {
 	Conversation: Conversation
-};
-</code></pre>
+};</code></pre>
         </article>
     </section>
 
@@ -722,13 +755,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Call.html">Call</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:call">member:call</a></li><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jan 08 2018 16:23:20 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 20 2018 17:01:07 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>
