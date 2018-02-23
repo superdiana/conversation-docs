@@ -28,7 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>/*
  * Conversation SDK
- *  Application object model
+ *  Application Object Model
  *
  * Copyright (c) Nexmo Inc. 2015
  */
@@ -40,6 +40,7 @@ var User = require('./user').User;
 var Conversation = require('./conversation').Conversation;
 var Event = require('./events/event').Event;
 var Call = require('./modules/call').Call;
+var utils = require('./utils');
 
 // Conversation Client Error
 var ConversationClientError = require('./conversationClientError');
@@ -53,18 +54,17 @@ var NexmoClientError = ConversationClientError.NexmoClientError;
  * Provides methods to create conversations and retrieve a list of the user's conversations, while it holds the listeners for 
  * user's invitations 
  * @class
- * @param {ConversationClient} SDK session object
- * @param {Object} params
- * @example &lt;caption>Accessing conversations' list&lt;/caption>
- * 
- * rtc.login(token).then(
- *  function(application){
- * //get a list of conversations the logged in user has been invited to or has joined
- *      console.log(application.conversations);
- * //get the user's name and id
- *      console.lof(application.me.name, application.me.id)
- *   });
- */
+ * @param {ConversationClient} SDK session Object
+ * @param {object} params
+ * @example &lt;caption>Accessing the list of conversations&lt;/caption>
+ *   rtc.login(token).then(function(application) {
+      console.log(application.conversations);
+      console.log(application.me.name, application.me.id);
+  });
+  * @fires Application#member:invited
+  * @fires Application#member:joined
+  * @fires Application#member:call
+  */
 var Application = function(session, params) {
 	this.log = logger.getLogger("Application");
 	this.session = session;
@@ -80,9 +80,7 @@ var Application = function(session, params) {
 	}
 };
 
-Application.prototype = new WildEmitter();
-//reset the original Type
-Application.prototype.constructor = Application;
+WildEmitter.mixin(Application);
 
 /**
  * Application listening for invites.
@@ -127,7 +125,7 @@ Application.prototype.constructor = Application;
  * @event Application#member:call
  * 
  * @property {Member} member - the member that initiated the call
- * @property {Promise&lt;Call>} call -  resolves the call object
+ * @property {Call} call -  resolves the call object
  * 
  * @example &lt;caption>listen for calls in Application level&lt;/caption>
  *  application.on("member:call",
@@ -166,12 +164,18 @@ Application.prototype._handleApplicationEvent = function(event) {
 	var payload;
 	switch (event.type) {
 		case 'member:invited':
+			if (conversation.me &amp;&amp; (conversation.me.user.name === event.body.invited_by)) return;
 			// identify only call type conversations to create member:call type of event. 
 			// other media invites should continue as member:invited
 			if (conversation.display_name &amp;&amp; conversation.display_name.startsWith('CALL_') &amp;&amp;
 				(mutated_event.body.user.media &amp;&amp; mutated_event.body.user.media.audio)) {
-
-				payload = new Call(self, conversation);
+				var caller = 'unknown';
+				if (mutated_event &amp;&amp; mutated_event.body.invited_by) {
+					caller = utils.getMemberFromNameOrNull(conversation, mutated_event.body.invited_by) || 'unknown';
+				} else {
+					caller = conversation.me;
+				}
+				payload = new Call(self, conversation, caller);
 				mutated_event.type = 'member:call';
 			} else {
 				payload = new Event(conversation, mutated_event);
@@ -193,14 +197,12 @@ Application.prototype.call = function(usernames) {
 	var self = this;
 	return new Promise(function(resolve, reject) {
 		if (!usernames || !Array.isArray(usernames) || usernames.length === 0) {
-			reject(new NexmoClientError("error:application:call:params"));
-			return;
+			return reject(new NexmoClientError("error:application:call:params"));
 		}
 		var call = new Call(self);
 		return call.createCall(usernames)
-			.then(function(invites) {
-				call.to = invites;
-				resolve(call);
+			.then(function() {
+				return resolve(call);
 			});
 	});
 }
@@ -208,9 +210,9 @@ Application.prototype.call = function(usernames) {
 /**
  * Query the service to create a new conversation
  * The conversation name must be unique per application.
- * @param {Object} [params] - leave empty to get a GUID as name
- * @param {String} params.name - the name of the conversation. A UID will be assigned if this is skipped
- * @param {String} params.display_name - the display_name of the conversation.
+ * @param {object} [params] - leave empty to get a GUID as name
+ * @param {string} params.name - the name of the conversation. A UID will be assigned if this is skipped
+ * @param {string} params.display_name - the display_name of the conversation.
  * @returns {Promise&lt;Conversation>} - the created Conversation
  * @example &lt;caption>Create a conversation and join&lt;/caption>
  * application.newConversation().then(
@@ -253,9 +255,9 @@ Application.prototype.newConversation = function(params) {
 /**
  * Query the service to create a new conversation and join it
  * The conversation name must be unique per application.
- * @param {Object} [params] - leave empty to get a GUID as name
- * @param {String} params.name - the name of the conversation. A UID will be assigned if this is skipped
- * @param {String} params.display_name - the display_name of the conversation.
+ * @param {object} [params] - leave empty to get a GUID as name
+ * @param {string} params.name - the name of the conversation. A UID will be assigned if this is skipped
+ * @param {string} params.display_name - the display_name of the conversation.
  * @returns {Promise&lt;Conversation>} - the created Conversation
  * @example &lt;caption>Create a conversation and join&lt;/caption>
  * application.newConversationAndJoin().then(
@@ -288,7 +290,7 @@ Application.prototype.newConversationAndJoin = function(params) {
  * logged in user as a member and retrieve the data object
  * Result added (or updated) in this.conversations
  * 
- * @param {String} id - the id of the conversation to fetch  
+ * @param {string} id - the id of the conversation to fetch  
  * @returns {Promise&lt;Conversation>} - the requested conversation 
  */
 Application.prototype.getConversation = function(id) {
@@ -370,8 +372,8 @@ Application.prototype.getConversations = function(params) {
  *
  * @event Application#sync:progress
  * 
- * @property {Number} status.sync_progress - Percentage of fetched conversations
- * @property {Number} status.idb_progress - Percentage of conversations stored in indexedDB
+ * @property {number} status.sync_progress - Percentage of fetched conversations
+ * @property {number} status.idb_progress - Percentage of conversations stored in indexedDB
  * @example &lt;caption>listening for changes in the synchronisation progress&lt;/caption>
  *  application.on("sync:progress",
  *      function(status) {
@@ -424,7 +426,7 @@ Application.prototype.syncConversations = function(conversations) {
 
 /**
  * Get Details of a user
- * @param {String} [id] - the id of the user to fetch, if skipped, it returns your own user details
+ * @param {string} [id] - the id of the user to fetch, if skipped, it returns your own user details
  * @returns {Promise&lt;User>} 
  */
 Application.prototype.getUser = function(user_id) {
@@ -462,13 +464,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Call.html">Call</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:call">member:call</a></li><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Call.html">Call</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:call">member:call</a></li><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Call.html#event:call:member:state">call:member:state</a></li><li><a href="Call.html#event:call:state:changed">call:state:changed</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CALL_STATES">CALL_STATES</a></li><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#MEMBER_CALL_STATES">MEMBER_CALL_STATES</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 20 2018 17:01:07 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Feb 23 2018 20:11:48 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>
