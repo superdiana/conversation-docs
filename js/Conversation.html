@@ -64,6 +64,248 @@
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>me</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Member.html">Member</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">my Member object that belongs to this conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>application</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Application.html">Application</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the parent Application</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the name of the Conversation (unique)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>display_name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the display_name of the Conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>members</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the members of the Conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>events</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the members of the Conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sequence_number</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the last event id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 <dl class="details">
 
     
@@ -248,7 +490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line471">line 471</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line454">line 454</a>
     </li></ul></dd>
     
 
@@ -289,7 +531,7 @@
     
         <p class="code-caption">cancel sending an image</p>
     
-    <pre class="prettyprint"><code>conversation.sendImage(fileInput.files[0]).then(function(imageRequest){ 
+    <pre class="prettyprint"><code>conversation.sendImage(fileInput.files[0]).then(function(imageRequest){
    conversation.abortSendImage(imageRequest);
 });</code></pre>
 
@@ -353,7 +595,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line178">line 178</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -516,7 +758,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line202">line 202</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line204">line 204</a>
     </li></ul></dd>
     
 
@@ -620,7 +862,7 @@
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -672,7 +914,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -695,7 +937,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -753,7 +995,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line527">line 527</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line510">line 510</a>
     </li></ul></dd>
     
 
@@ -903,7 +1145,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -971,7 +1213,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line228">line 228</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line230">line 230</a>
     </li></ul></dd>
     
 
@@ -1135,7 +1377,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1203,7 +1445,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line276">line 276</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line278">line 278</a>
     </li></ul></dd>
     
 
@@ -1329,7 +1571,7 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -1387,7 +1629,7 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1410,7 +1652,7 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1468,7 +1710,7 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line124">line 124</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line126">line 126</a>
     </li></ul></dd>
     
 
@@ -1539,24 +1781,6 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
 
 <div class="description">
     Leave from the conversation
-<pre>
-
---> conversation:member:delete
-     payload = {
-          type: 'conversation:member:delete',
-          cid: &lt;conversation_id&gt;,
-          from: &lt;member_id&gt;
-          to: &lt;member_id&gt;,
-          body: {
-              "member_id": &lt;member_id&gt; //this is my member id
-          }
-     }
-
-<-- [ack] conversation:member:delete:success
-
-<-- conversation:member:delete
-
-</pre>
 </div>
 
 
@@ -1600,7 +1824,7 @@ Accept an invitation if our member has state INVITED and no user_id / user_name 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line311">line 311</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line294">line 294</a>
     </li></ul></dd>
     
 
@@ -1742,7 +1966,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1781,7 +2005,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1807,7 +2031,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
                 </td>
             
 
-            <td class="description last">a value between 1 and 100. 1 indicates the new image is 1% of original, 100 - same size as origina</td>
+            <td class="description last">a value between 1 and 100. 1 indicates the new image is 1% of original, 100 - same size as original</td>
         </tr>
 
     
@@ -1820,7 +2044,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -1887,7 +2111,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line401">line 401</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line384">line 384</a>
     </li></ul></dd>
     
 
@@ -1936,8 +2160,8 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
         <p class="code-caption">sending an image</p>
     
-    <pre class="prettyprint"><code>conversation.sendImage(fileInput.files[0]).then(function(imageRequest){ 
-   
+    <pre class="prettyprint"><code>conversation.sendImage(fileInput.files[0]).then(function(imageRequest){
+
         imageRequest.onabort = function(e) {
            console.log(e);
          console.log("Image:" + e.type);
@@ -2005,7 +2229,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">string</span>
 
 
             
@@ -2056,7 +2280,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line346">line 346</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line329">line 329</a>
     </li></ul></dd>
     
 
@@ -2175,7 +2399,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line482">line 482</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line465">line 465</a>
     </li></ul></dd>
     
 
@@ -2283,7 +2507,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line492">line 492</a>
+        <a href="conversation.js.html">conversation.js</a>, <a href="conversation.js.html#line475">line 475</a>
     </li></ul></dd>
     
 
@@ -2474,7 +2698,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line292">line 292</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line290">line 290</a>
     </li></ul></dd>
     
 
@@ -2646,7 +2870,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line272">line 272</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line270">line 270</a>
     </li></ul></dd>
     
 
@@ -2823,7 +3047,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line253">line 253</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line251">line 251</a>
     </li></ul></dd>
     
 
@@ -3000,7 +3224,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line395">line 395</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line393">line 393</a>
     </li></ul></dd>
     
 
@@ -3180,7 +3404,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line320">line 320</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line318">line 318</a>
     </li></ul></dd>
     
 
@@ -3351,7 +3575,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line306">line 306</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line304">line 304</a>
     </li></ul></dd>
     
 
@@ -3523,7 +3747,7 @@ implements xhr (https://xhr.spec.whatwg.org/) - this.imageRequest
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line333">line 333</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line331">line 331</a>
     </li></ul></dd>
     
 
@@ -3744,7 +3968,7 @@ Change in media presence state. They are in the conversation with text, audio or
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line416">line 416</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line414">line 414</a>
     </li></ul></dd>
     
 
@@ -3916,7 +4140,7 @@ Change in media presence state. They are in the conversation with text, audio or
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line372">line 372</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line370">line 370</a>
     </li></ul></dd>
     
 
@@ -4097,7 +4321,7 @@ Change in media presence state. They are in the conversation with text, audio or
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line359">line 359</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line357">line 357</a>
     </li></ul></dd>
     
 
@@ -4268,7 +4492,7 @@ Change in media presence state. They are in the conversation with text, audio or
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line346">line 346</a>
+        <a href="sdk.js.html">sdk.js</a>, <a href="sdk.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -4318,13 +4542,13 @@ Change in media presence state. They are in the conversation with text, audio or
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Call.html">Call</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:call">member:call</a></li><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Application.html">Application</a></li><li><a href="Call.html">Call</a></li><li><a href="Conversation.html">Conversation</a></li><li><a href="ConversationClient.html">ConversationClient</a></li><li><a href="Event.html">Event</a></li><li><a href="ImageEvent.html">ImageEvent</a></li><li><a href="Media.html">Media</a></li><li><a href="Member.html">Member</a></li><li><a href="TextEvent.html">TextEvent</a></li></ul><h3>Events</h3><ul><li><a href="Application.html#event:member:call">member:call</a></li><li><a href="Application.html#event:member:invited">member:invited</a></li><li><a href="Application.html#event:member:joined">member:joined</a></li><li><a href="Application.html#event:sync:progress">sync:progress</a></li><li><a href="Call.html#event:call:member:state">call:member:state</a></li><li><a href="Call.html#event:call:state:changed">call:state:changed</a></li><li><a href="Conversation.html#event:event:delete">delete</a></li><li><a href="Conversation.html#event:image">image</a></li><li><a href="Conversation.html#event:text">text</a></li><li><a href="Conversation.html#event:image:seen">image:seen</a></li><li><a href="Conversation.html#event:member:invited">member:invited</a></li><li><a href="Conversation.html#event:member:joined">member:joined</a></li><li><a href="Conversation.html#event:member:left">member:left</a></li><li><a href="Conversation.html#event:member:media">member:media</a></li><li><a href="Conversation.html#event:text:seen">text:seen</a></li><li><a href="Conversation.html#event:text:typing:off">text:typing:off</a></li><li><a href="Conversation.html#event:text:typing:on">text:typing:on</a></li><li><a href="ConversationClient.html#event:connecting">connecting</a></li><li><a href="ConversationClient.html#event:disconnect">disconnect</a></li><li><a href="ConversationClient.html#event:error">error</a></li><li><a href="ConversationClient.html#event:ready">ready</a></li><li><a href="ConversationClient.html#event:reconnect">reconnect</a></li><li><a href="ConversationClient.html#event:reconnecting">reconnecting</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CALL_STATES">CALL_STATES</a></li><li><a href="global.html#ConversationClientErrorTypes">ConversationClientErrorTypes</a></li><li><a href="global.html#me">me</a></li><li><a href="global.html#MEMBER_CALL_STATES">MEMBER_CALL_STATES</a></li><li><a href="global.html#NexmoApiError">NexmoApiError</a></li><li><a href="global.html#NexmoClientError">NexmoClientError</a></li><li><a href="global.html#NexmoClientErrorTypes">NexmoClientErrorTypes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 20 2018 17:01:07 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Feb 23 2018 20:11:48 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>
