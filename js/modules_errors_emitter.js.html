@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: conversationClientError.js</title>
+    <title>JSDoc: Source: modules/errors_emitter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: conversationClientError.js</h1>
+    <h1 class="page-title">Source: modules/errors_emitter.js</h1>
 
     
 
@@ -26,67 +26,35 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/*
- * Nexmo Stitch SDK
- *  Conversation Client - API Error wrapper
- *
- * Copyright (c) Nexmo Inc. 2017
- */
-
-const NexmoClientErrorTypes = require('./conversationClientErrorTypes');
-
-function decorateError(instance, error) {
-
-	Object.assign(instance, error);
-	instance.message = 'type: ' + instance.type + ', description: ' + (instance.description ? instance.description : '');
-	instance.stack = new Error().stack;
-}
+            <pre class="prettyprint source linenums"><code>const LISTENER_GROUP = 'Stitch-errors';
 
 /**
- * Error constructor of an NexmoClient-error
- * @param {string} errorInput String client error
+ * Class that can emit errors via any emitter passed to it.
+ * @class ErrorsEmitter
+ * @param {Emitter} emitter - Any event emitter that implements "emit" and "releaseGroup". Basically object that is mixed with Wildemitter.
+ * @emits Emitter#NXM-errors
  */
-const NexmoClientError = function(errorInput) {
-	const error = NexmoClientErrorTypes[errorInput];
-	// for other errors (libs/browser APIs) re-use the Client error
-	// to forward it but don't throw it away
-	if (error) {
-		// if error type exists in our list keep consistency
-		decorateError(this, error);
-	} else {
-		//if the structure is not as expected, f/w as much as we can get
-		this.message = (errorInput &amp;&amp; errorInput.message) ? errorInput.message : errorInput;
-		this.stack = (errorInput &amp;&amp; errorInput.stack) ? errorInput.stack : new Error().stack;
-	}
+class ErrorsEmitter {
+    constructor(emitter) {
+        this.emitter = emitter;
+    }
 
-	// make sure the error.name matches the class name
-	this.name = 'NexmoClientError';
+    emitResponseIfError(response) {
+        if (this._isTypeError(response.type)) {
+            this.emitter.emit(response.type, LISTENER_GROUP, response);
+        }
+    }
+
+    cleanup() {
+        this.emitter.releaseGroup(LISTENER_GROUP);
+    }
+
+    _isTypeError(type) {
+        return type.indexOf('error') !== -1;
+    }
 }
 
-NexmoClientError.prototype = Object.create(NexmoClientError.prototype);
-NexmoClientError.prototype.constructor = NexmoClientError;
-
-
-/**
- * Error constructor of an API-error
- * @param {object} error API error, always containing {type: &lt;string>}
- */
-const NexmoApiError = function(error) {
-
-	decorateError(this, error);
-	// make sure the error.name matches the class name
-	this.name = 'NexmoApiError';
-}
-
-NexmoApiError.prototype = Object.create(NexmoApiError.prototype);
-NexmoApiError.prototype.constructor = NexmoApiError;
-
-
-module.exports = {
-	NexmoClientError: NexmoClientError,
-	NexmoApiError: NexmoApiError
-}
-</code></pre>
+module.exports = ErrorsEmitter;</code></pre>
         </article>
     </section>
 
