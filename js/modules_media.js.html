@@ -57,6 +57,7 @@ const NexmoClientError = ConversationClientError.NexmoClientError;
  * @property {Stream} parentConversation.rtcObjects.localStream the stream of the specific rtc_id
  * @property {string} parentConversation.rtcObjects.type=video|screenshare the type of the stream
  * @property {number} parentConversation.rtcObjects.streamIndex the index number of the stream (e.g. use to mute)
+ * @property {Promise[]} rtcNewPromises an array that contains all the promises of the rtc:new requests
  * @emits Application#rtcstats:report
  * @emits Member#media:stream:on
  */
@@ -89,7 +90,7 @@ class Media {
             this.parentConversation = conversation;
             this.parentConversation.remoteMembers = [];
             this.parentConversation.rtcObjects = {};
-            this.rtcPromises = [];
+            this.rtcNewPromises = [];
             this.streamIndex = 0;
             this.rtcstats_enabled = (this.application.session.config &amp;&amp; this.application.session.config.rtcstats_enabled);
             this.rtcstats_events = (this.application.session.config &amp;&amp; this.application.session.config.rtcstats_events);
@@ -408,7 +409,7 @@ class Media {
                     reject(new NexmoApiError(e));
                 })
         });
-        this.rtcPromises.push(p);
+        this.rtcNewPromises.push(p);
         this.parentConversation.me.emit("media:stream:on", {
             type,
             name: name,
@@ -830,6 +831,11 @@ class Media {
         });
     }
 
+	/**
+	 * Send a mute request with the rtc_id and enable/disable the tracks
+	 * If the mute request fails revert the changes in the tracks
+	 * @private
+	 */
     _setMediaTracksAndMute(rtc_id, tracks, mute, mediaType, mediaSuccess) {
         this._enableMediaTracks(tracks, !mute);
         return new Promise((resolve, reject) => {
@@ -844,71 +850,62 @@ class Media {
         })
     }
 
-    _waitForAllRtcObject() {
-        return Promise.all(this.rtcPromises);
+	/**
+	 * Wait for all the rtc:new requests to be done.
+	 * Even if some of them fail resolve the promise and log a warn
+	 * @private
+	 */
+    _waitAllRtcNewAreCompleted() {
+        return Promise.all(this.rtcNewPromises)
+            .catch(() => {
+                this.log.warn('Some of the enable requests failed.');
+            });
     }
 
 	/**
 	 * Mute our member
 	 *
-	 * @param {number} [streamIndex] stream id to set
-	 * @param {boolean} [mute] true for mute, false for unmute
-	 * @param {boolean} [audio=true] true for audio stream
-	 * @param {boolean} [video=false] true for video stream
-	 * @example &lt;caption>Mute audio stream&lt;/caption>
-	 * media.mute(true, true, false)
-	 * @example &lt;caption>Mute audio and video streams&lt;/caption>
-	 * media.mute(true, true, true)
-	 * @example &lt;caption>Mute only video&lt;/caption>
-	 * media.mute(true, false, true)
-	 * @private
+	 * @param {boolean} [mute=false] true for mute, false for unmute
+	 * @param {boolean} [audio=true] true for audio stream - relevant only in video conversation
+	 * @param {boolean} [video=false] true for video stream - relevant only in video conversation
+	 * @param {number} [streamIndex=0] stream id to set - relevant only in video conversation
+	 * @example &lt;caption>Mute audio stream in non video conversation&lt;/caption>
+	 * media.mute(true)
+	 * @example &lt;caption>Mute audio and video streams in video conversation&lt;/caption>
+	 * media.mute(true, true, true, 0)
+	 * @example &lt;caption>Mute only video in video conversation&lt;/caption>
+	 * media.mute(true, false, true, 0)
 	 */
-    mute(mute, audio = true, video = false, streamIndex) {
+    mute(mute = false, audio = true, video = false, streamIndex = 0) {
         const state = mute ? 'on' : 'off';
         const audioType = 'audio:mute:' + state;
         const videoType = 'video:mute:' + state;
         const audioSuccess = audioType + ':success';
         const videoSuccess = videoType + ':success';
 
-        let promises = [];
+        return this._waitAllRtcNewAreCompleted()
+            .then(() => {
+                const rtcObject = Object.values(this.parentConversation.rtcObjects).find((rtcObj => rtcObj.streamIndex === streamIndex));
+                if (!rtcObject) {
+                    throw new NexmoClientError('error:media:stream:not-found');
+                }
 
-        if (audio) {
-            if (streamIndex !== undefined) {
-                const audioPromise = this._waitForAllRtcObject()
-                    .then(() => {
-                        const rtcObject = Object.values(this.parentConversation.rtcObjects).find((rtcObj => rtcObj.streamIndex === streamIndex));
-                        if (rtcObject) {
-                            const audioTracks = rtcObject.localStream.getAudioTracks();
-                            return this._setMediaTracksAndMute(rtcObject.id, audioTracks, mute, audioType, audioSuccess);
-                        }
-                    });
-                promises.push(audioPromise);
-            }
-        }
+                let promises = [];
 
-        if (this.application.activeStream &amp;&amp; this.application.activeStream.rtc_id) {
-            const rtc_id = this.application.activeStream.rtc_id;
-            const audioTracks = this.parentConversation.localStream.getAudioTracks();
-            const audioPromise = this._setMediaTracksAndMute(rtc_id, audioTracks, mute, audioType, audioSuccess);
-            promises.push(audioPromise);
-        }
+                if (audio) {
+                    const audioTracks = rtcObject.localStream.getAudioTracks();
+                    const audioPromise = this._setMediaTracksAndMute(rtcObject.id, audioTracks, mute, audioType, audioSuccess);
+                    promises.push(audioPromise);
+                }
 
+                if (video) {
+                    const videoTracks = rtcObject.localStream.getVideoTracks();
+                    const videoPromise = this._setMediaTracksAndMute(rtcObject.id, videoTracks, mute, videoType, videoSuccess);
+                    promises.push(videoPromise);
+                }
 
-        if (video) {
-            if (streamIndex !== undefined) {
-                const audioPromise = this._waitForAllRtcObject()
-                    .then(() => {
-                        const rtcObject = Object.values(this.parentConversation.rtcObjects).find((rtcObj => rtcObj.streamIndex === streamIndex));
-                        if (rtcObject) {
-                            const videoTracks = rtcObject.localStream.getVideoTracks();
-                            return this._setMediaTracksAndMute(rtcObject.id, videoTracks, mute, videoType, videoSuccess);
-                        }
-                    });
-                promises.push(audioPromise);
-            }
-        }
-
-        return Promise.all(promises);
+                return Promise.all(promises);
+            });
     }
 
     /**
@@ -1024,161 +1021,181 @@ class Media {
                     this._initStatsEvents();
                 }
 
-                this.rtcHelper.getUserAudio()
-                    .then((localStream) => {
-                        if (this.application.activeStream.rtc_id) {
-                            return onClientError(new NexmoClientError('error:media:already-connecting'));
-                        }
-                        const clientId = Utils.allocateUUID();
-                        const pc_config = {
-                            'iceTransportPolicy': 'all',
-                            'bundlePolicy': 'balanced',
-                            'rtcpMuxPolicy': 'require',
-                            'iceCandidatePoolSize': '0'
-                        };
-                        if (this.application.session.config.iceServers) {
-                            pc_config.iceServers = this.application.session.config.iceServers
-                        }
-                        const pc = this.rtcHelper.createRTCPeerConnection(pc_config, {
-                            optional: [{
-                                'DtlsSrtpKeyAgreement': 'true'
-                            }]
-                        }, clientId);
-
-                        pc.trace('conversation_id', this.parentConversation.id);
-                        pc.trace('member_id', this.parentConversation.me.id);
-
-                        this.parentConversation.pc = pc;
-                        this.application.activeStream.pc = pc;
-
-                        this.parentConversation.localStream = localStream;
-                        pc.ontrack = (evt) => {
-                            this.application.activeStream.stream = evt.streams[0];
-                            this.streamIndex++
-                            resolve(evt.streams[0]);
-                        };
-                        pc.addStream(localStream);
-
-                        pc.onnegotiationneeded = () => {
-                            pc.createOffer().then((offer) => {
-                                return pc.setLocalDescription(offer);
-                            }).then(() => {
-
-                                // Send the offer to the remote peer through the signaling server
-                            }).catch(onClientError);
-                        }
-
-                        pc.oniceconnectionstatechange = (status) => {
-                            switch (pc.iceConnectionState) {
-                                //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/iceConnectionState
-                                case 'disconnected':
-                                    this.log.warn('One or more transports is disconnected', pc.iceConnectionState);
-                                    break;
-                                case 'failed':
-                                    onClientError(status);
-                                    this.log.warn('One or more transports has terminated unexpectedly or in an error', status);
-                                    break;
-                                default:
-                                    this.log.debug('The ice connection status changed', pc.iceConnectionState);
-                                    break;
-                            }
-                        }
-                        let gatheringTimer = null;
-                        let rtc_sent = false;
-                        pc.onicegatheringstatechange = () => {
-                            const do_gatherDone = () => {
-                                if (!this.parentConversation.pc) {
-                                    return;
-                                }
-                                const event_to_emit = {
-                                    type: 'rtc:new',
-                                    cid: this.parentConversation.id,
-                                    from: this.parentConversation.me.id,
-                                    body: {
-                                        offer: this.parentConversation.pc.localDescription
-                                    }
-                                }
-                                if (params &amp;&amp; params.label) {
-                                    event_to_emit.label = params.label;
-                                }
-                                this.application.session.sendRequest(event_to_emit, (response) => {
-                                    if (response.type === 'rtc:new:success') {
-                                        const rtc_id = response.body.rtc_id;
-                                        this.application.activeStream.rtc_id = rtc_id;
-                                        pc.trace('rtc_id', rtc_id);
-                                        this.parentConversation.rtcObjects[rtc_id] = {
-                                            id: rtc_id,
-                                            pc: pc,
-                                            localStream: localStream,
-                                            // type: 'audio,
-                                            streamIndex: this.streamIndex
-                                        };
-                                    } else {
-                                        reject(new NexmoApiError(response));
-                                    }
-                                });
-                            };
-
-                            switch (pc.iceGatheringState) {
-                                case 'new':
-
-                                    this.log.debug('ice gathering new');
-                                    break;
-                                case 'complete':
-                                    window.clearTimeout(gatheringTimer);
-                                    gatheringTimer = null;
-                                    if (!rtc_sent) {
-                                        do_gatherDone();
-                                    }
-                                    this.log.debug('ice gathering complete');
-
-                                    break;
-                                case 'gathering':
-                                    gatheringTimer = setTimeout(() => {
-                                        do_gatherDone();
-                                        rtc_sent = true;
-                                    }, 2000);
-                                    this.log.debug('ice gathering gathering');
-                                    break;
-                            }
-                        }
-                    })
-                    .then(() => {
-                        // We want to be able to handle these events, for this  member, before they get propagated out
-                        this.parentConversation.once('rtc:answer', 'media_module', (event) => {
-
-                            if (!this.application.activeStream.rtc_id) {
-                                this.log.warn("RTC: rtc:new hasn't been resolved yet");
-                            } else if (this.application.activeStream.rtc_id !== event.body.rtc_id) {
-                                this.log.warn("RTC: skipping  rtc answer for different rtc_id");
-                                return;
-                            }
-                            if (!this.parentConversation.pc) {
-                                this.log.warn('RTC: received an answer too late');
-                                return;
-                            }
-                            this.parentConversation.pc.setRemoteDescription(new RTCSessionDescription({
-                                type: 'answer',
-                                sdp: event.body.answer
-                            }),
-                                () => {
-                                    this.log.debug('remote description is set');
-                                },
-                                onClientError);
-                        });
-                        //on member delete (our this)
-                        //terminate media
-                        this.parentConversation.on('member:left', 'media_module', (member) => {
-                            if (member.user.id === this.application.me.id &amp;&amp; this.application.activeStream) {
-                                this.disable();
-                            }
-                        });
-                    })
-                    .catch((error) => {
-                        reject(new NexmoClientError(error));
-                    });
+                return this._handleAudio(params)
+                    .then((result) => resolve(result))
+                    .catch((error) => reject(error));
             }
         });
+    }
+
+	/**
+	 * Handles the enabling of audio only stream with rtc:new
+	 * @private
+	 */
+    _handleAudio(params) {
+        const rtcNewPromise = new Promise((resolve, reject) => {
+            const onClientError = (error) => {
+                this.log.error(error);
+                reject(new NexmoClientError(error));
+            }
+            const streamIndex = this.streamIndex;
+            this.streamIndex++;
+            this.rtcHelper.getUserAudio()
+                .then((localStream) => {
+                    if (this.application.activeStream.rtc_id) {
+                        return onClientError(new NexmoClientError('error:media:already-connecting'));
+                    }
+                    const clientId = Utils.allocateUUID();
+                    const pc_config = {
+                        'iceTransportPolicy': 'all',
+                        'bundlePolicy': 'balanced',
+                        'rtcpMuxPolicy': 'require',
+                        'iceCandidatePoolSize': '0'
+                    };
+                    if (this.application.session.config.iceServers) {
+                        pc_config.iceServers = this.application.session.config.iceServers
+                    }
+                    const pc = this.rtcHelper.createRTCPeerConnection(pc_config, {
+                        optional: [{
+                            'DtlsSrtpKeyAgreement': 'true'
+                        }]
+                    }, clientId);
+
+                    pc.trace('conversation_id', this.parentConversation.id);
+                    pc.trace('member_id', this.parentConversation.me.id);
+
+                    this.parentConversation.pc = pc;
+                    this.application.activeStream.pc = pc;
+
+                    this.parentConversation.localStream = localStream;
+                    pc.ontrack = (evt) => {
+                        this.application.activeStream.stream = evt.streams[0];
+                        resolve(evt.streams[0]);
+                    };
+                    pc.addStream(localStream);
+
+                    pc.onnegotiationneeded = () => {
+                        pc.createOffer().then((offer) => {
+                            return pc.setLocalDescription(offer);
+                        }).then(() => {
+
+                            // Send the offer to the remote peer through the signaling server
+                        }).catch(onClientError);
+                    }
+
+                    pc.oniceconnectionstatechange = (status) => {
+                        switch (pc.iceConnectionState) {
+                            //https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/iceConnectionState
+                            case 'disconnected':
+                                this.log.warn('One or more transports is disconnected', pc.iceConnectionState);
+                                break;
+                            case 'failed':
+                                onClientError(status);
+                                this.log.warn('One or more transports has terminated unexpectedly or in an error', status);
+                                break;
+                            default:
+                                this.log.debug('The ice connection status changed', pc.iceConnectionState);
+                                break;
+                        }
+                    }
+                    let gatheringTimer = null;
+                    let rtc_sent = false;
+                    pc.onicegatheringstatechange = () => {
+                        const do_gatherDone = () => {
+                            if (!this.parentConversation.pc) {
+                                return;
+                            }
+                            const event_to_emit = {
+                                type: 'rtc:new',
+                                cid: this.parentConversation.id,
+                                from: this.parentConversation.me.id,
+                                body: {
+                                    offer: this.parentConversation.pc.localDescription
+                                }
+                            }
+                            if (params &amp;&amp; params.label) {
+                                event_to_emit.label = params.label;
+                            }
+                            this.application.session.sendRequest(event_to_emit, (response) => {
+                                if (response.type === 'rtc:new:success') {
+                                    const rtc_id = response.body.rtc_id;
+                                    this.application.activeStream.rtc_id = rtc_id;
+                                    pc.trace('rtc_id', rtc_id);
+                                    this.parentConversation.rtcObjects[rtc_id] = {
+                                        id: rtc_id,
+                                        pc: pc,
+                                        localStream: localStream,
+                                        // type: 'audio,
+                                        streamIndex: streamIndex
+                                    };
+                                } else {
+                                    reject(new NexmoApiError(response));
+                                }
+                            });
+                        };
+
+                        switch (pc.iceGatheringState) {
+                            case 'new':
+
+                                this.log.debug('ice gathering new');
+                                break;
+                            case 'complete':
+                                window.clearTimeout(gatheringTimer);
+                                gatheringTimer = null;
+                                if (!rtc_sent) {
+                                    do_gatherDone();
+                                }
+                                this.log.debug('ice gathering complete');
+
+                                break;
+                            case 'gathering':
+                                gatheringTimer = setTimeout(() => {
+                                    do_gatherDone();
+                                    rtc_sent = true;
+                                }, 2000);
+                                this.log.debug('ice gathering gathering');
+                                break;
+                        }
+                    }
+                })
+                .then(() => {
+                    // We want to be able to handle these events, for this  member, before they get propagated out
+                    this.parentConversation.once('rtc:answer', 'media_module', (event) => {
+
+                        if (!this.application.activeStream.rtc_id) {
+                            this.log.warn("RTC: rtc:new hasn't been resolved yet");
+                        } else if (this.application.activeStream.rtc_id !== event.body.rtc_id) {
+                            this.log.warn("RTC: skipping  rtc answer for different rtc_id");
+                            return;
+                        }
+                        if (!this.parentConversation.pc) {
+                            this.log.warn('RTC: received an answer too late');
+                            return;
+                        }
+                        this.parentConversation.pc.setRemoteDescription(new RTCSessionDescription({
+                            type: 'answer',
+                            sdp: event.body.answer
+                        }),
+                            () => {
+                                this.log.debug('remote description is set');
+                            },
+                            onClientError);
+                    });
+                    //on member delete (our this)
+                    //terminate media
+                    this.parentConversation.on('member:left', 'media_module', (member) => {
+                        if (member.user.id === this.application.me.id &amp;&amp; this.application.activeStream) {
+                            this.disable();
+                        }
+                    });
+                })
+                .catch((error) => {
+                    reject(new NexmoClientError(error));
+                });
+        });
+        this.rtcNewPromises.push(rtcNewPromise);
+
+        return rtcNewPromise;
     }
 
     /**
@@ -1429,7 +1446,7 @@ module.exports = Media;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Aug 19 2018 11:07:28 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Aug 20 2018 16:32:54 GMT+0100 (BST)
 </footer>
 
 <script> prettyPrint(); </script>

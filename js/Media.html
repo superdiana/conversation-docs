@@ -414,6 +414,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>rtcNewPromises</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Promise></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an array that contains all the promises of the rtc:new requests</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -562,7 +585,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1171">line 1171</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1188">line 1188</a>
     </li></ul></dd>
     
 
@@ -988,7 +1011,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line963">line 963</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line960">line 960</a>
     </li></ul></dd>
     
 
@@ -1174,7 +1197,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1268">line 1268</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1285">line 1285</a>
     </li></ul></dd>
     
 
@@ -1217,6 +1240,293 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
 
 
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="mute"><span class="type-signature"></span>mute<span class="signature">(mute<span class="signature-attributes">opt</span>, audio<span class="signature-attributes">opt</span>, video<span class="signature-attributes">opt</span>, streamIndex<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mute our member
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mute</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">true for mute, false for unmute</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>audio</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last">true for audio stream - relevant only in video conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>video</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">true for video stream - relevant only in video conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>streamIndex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">stream id to set - relevant only in video conversation</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line851">line 851</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Mute audio stream in non video conversation</p>
+    
+    <pre class="prettyprint"><code>media.mute(true)</code></pre>
+
+        <p class="code-caption">Mute audio and video streams in video conversation</p>
+    
+    <pre class="prettyprint"><code>media.mute(true, true, true, 0)</code></pre>
+
+        <p class="code-caption">Mute only video in video conversation</p>
+    
+    <pre class="prettyprint"><code>media.mute(true, false, true, 0)</code></pre>
 
 
 
@@ -1278,7 +1588,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1298">line 1298</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1315">line 1315</a>
     </li></ul></dd>
     
 
@@ -1595,7 +1905,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1237">line 1237</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1254">line 1254</a>
     </li></ul></dd>
     
 
@@ -1894,7 +2204,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1198">line 1198</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1215">line 1215</a>
     </li></ul></dd>
     
 
@@ -2003,7 +2313,7 @@ possible values for direction "both", "send_only", "receive_only", "none", true 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1333">line 1333</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1350">line 1350</a>
     </li></ul></dd>
     
 
@@ -2123,7 +2433,7 @@ console.log("ringing");
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1368">line 1368</a>
+        <a href="modules_media.js.html">modules/media.js</a>, <a href="modules_media.js.html#line1385">line 1385</a>
     </li></ul></dd>
     
 
@@ -2207,7 +2517,7 @@ console.log("ringing stopped");
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Aug 19 2018 11:07:28 GMT+0100 (BST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Aug 20 2018 16:32:54 GMT+0100 (BST)
 </footer>
 
 <script> prettyPrint(); </script>
